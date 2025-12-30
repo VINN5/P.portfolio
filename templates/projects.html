@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-4">My Projects</h1>
+            <p class="lead text-muted">Here are some of the projects I've built with passion and precision.</p>
+        </div>
+
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    {% if project.image %}
+                    <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}" style="height: 220px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
+                        <i class="fas fa-code fa-4x text-muted opacity-50"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ project.description }}</p>
+                        <div class="mt-auto">
+                            {% if project.link %}
+                            <a href="{{ project.link }}" target="_blank" class="btn btn-primary btn-sm">
+                                View Live <i class="fas fa-external-link-alt ms-2"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.github %}
+                            <a href="{{ project.github }}" target="_blank" class="btn btn-outline-dark btn-sm ms-2">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+           
+            {% if projects|length < 6 %}
+                {% set placeholders_needed = 6 - projects|length %}
+                {% for _ in range(placeholders_needed) %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 opacity-50">
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
+                            <i class="fas fa-laptop-code fa-4x text-muted"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Coming Soon...</h5>
+                            <p class="card-text text-muted">Exciting new project in development.</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

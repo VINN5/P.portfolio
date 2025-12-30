@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5 min-vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">Let's Connect</h1>
+                <p class="lead text-muted mb-5">Reach out directly — I'm always open to new opportunities.</p>
+
+                <div class="d-flex justify-content-center gap-5 flex-wrap">
+                    <a href="mailto:vinnwambui2@gmail.com" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="Email">
+                        <i class="fas fa-envelope fa-3x"></i>
+                    </a>
+                    <a href="https://github.com/VINN5" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="GitHub">
+                        <i class="fab fa-github fa-3x"></i>
+                    </a>
+                    <a href="https://wa.me/254759270210" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="WhatsApp">
+                        <i class="fab fa-whatsapp fa-3x"></i>
+                    </a>
+                    <a href="tel:+254759270210" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="Call">
+                        <i class="fas fa-phone fa-3x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
