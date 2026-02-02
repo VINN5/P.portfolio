@@ -2,6 +2,75 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<style>
+    /* Mobile-specific adjustments for home page */
+    @media (max-width: 767.98px) {
+        .hero .row {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+
+        .hero h1 br {
+            display: none;
+        }
+
+        .hero .d-flex {
+            flex-direction: column;
+        }
+
+        .hero .btn {
+            width: 100%;
+        }
+
+        section.bg-light {
+            padding: 3rem 0 !important;
+        }
+
+        section.bg-light .display-5 {
+            font-size: 2rem !important;
+        }
+
+        section.bg-light .lead {
+            font-size: 1.1rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        section.bg-light .fs-5 {
+            font-size: 1rem !important;
+            text-align: left !important;
+        }
+
+        section.bg-light .col-lg-8 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .hero {
+            padding-top: 80px !important;
+            padding-bottom: 30px !important;
+        }
+
+        .hero .min-vh-100 {
+            min-height: auto !important;
+        }
+
+        section.bg-light .display-5 {
+            font-size: 1.75rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        section.bg-light .lead {
+            font-size: 1rem !important;
+        }
+
+        section.bg-light .fs-5 {
+            font-size: 0.95rem !important;
+        }
+    }
+</style>
+
 <section class="hero">
     <div class="dotted-circle"></div>
     <div class="container">
@@ -41,7 +110,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
+            <div class="col-lg-8 col-md-10 text-center">
                 <h2 class="display-5 fw-bold mb-4">About Me</h2>
                 <p class="lead text-muted mb-4">
                     Hi, I'm Vinn, a Computer Science graduate based in Nairobi, Kenya.

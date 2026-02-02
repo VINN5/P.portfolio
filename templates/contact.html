@@ -2,6 +2,101 @@
 {% block title %}Contact{% endblock %}
 
 {% block content %}
+<style>
+    /* Mobile-specific adjustments for contact page */
+    .contact-icon-btn {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .contact-icon-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 767.98px) {
+        section.py-5 {
+            padding-top: 100px !important;
+        }
+
+        .display-4 {
+            font-size: 2rem !important;
+        }
+
+        .lead {
+            font-size: 1rem !important;
+            margin-bottom: 2.5rem !important;
+        }
+
+        .contact-icon-btn {
+            width: 90px;
+            height: 90px;
+            padding: 0 !important;
+        }
+
+        .contact-icon-btn i {
+            font-size: 2rem !important;
+        }
+
+        .d-flex.gap-5 {
+            gap: 1.5rem !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        section.py-5 {
+            padding-top: 90px !important;
+        }
+
+        .display-4 {
+            font-size: 1.75rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .lead {
+            font-size: 0.95rem !important;
+            margin-bottom: 2rem !important;
+            padding: 0 1rem;
+        }
+
+        .contact-icon-btn {
+            width: 75px;
+            height: 75px;
+        }
+
+        .contact-icon-btn i {
+            font-size: 1.75rem !important;
+        }
+
+        .d-flex.gap-5 {
+            gap: 1rem !important;
+        }
+
+        .col-lg-8 {
+            padding: 0 1.5rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .contact-icon-btn {
+            width: 65px;
+            height: 65px;
+        }
+
+        .contact-icon-btn i {
+            font-size: 1.5rem !important;
+        }
+
+        .d-flex.gap-5 {
+            gap: 0.75rem !important;
+        }
+    }
+</style>
+
 <section class="py-5 mt-5 min-vh-100 d-flex align-items-center">
     <div class="container">
         <div class="row justify-content-center">
@@ -10,16 +105,16 @@
                 <p class="lead text-muted mb-5">Reach out directly — I'm always open to new opportunities.</p>
 
                 <div class="d-flex justify-content-center gap-5 flex-wrap">
-                    <a href="mailto:vinnwambui2@gmail.com" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="Email">
+                    <a href="mailto:vinnwambui2@gmail.com" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="Email">
                         <i class="fas fa-envelope fa-3x"></i>
                     </a>
-                    <a href="https://github.com/VINN5" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="GitHub">
+                    <a href="https://github.com/VINN5" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="GitHub">
                         <i class="fab fa-github fa-3x"></i>
                     </a>
-                    <a href="https://wa.me/254759270210" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="WhatsApp">
+                    <a href="https://wa.me/254759270210" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="WhatsApp">
                         <i class="fab fa-whatsapp fa-3x"></i>
                     </a>
-                    <a href="tel:+254759270210" class="btn btn-outline-dark btn-lg rounded-circle p-4" title="Call">
+                    <a href="tel:+254759270210" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="Call">
                         <i class="fas fa-phone fa-3x"></i>
                     </a>
                 </div>
