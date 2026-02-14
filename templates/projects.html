@@ -70,7 +70,7 @@
         }
     }
 
-    /* Ensure cards look good on all screens */
+    /* Hover effect for cards */
     .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -118,8 +118,6 @@
                                 <i class="fab fa-github"></i> Code
                             </a>
                             {% endif %}
-
-                            <!-- Show private repo note if present -->
                             {% if project.note %}
                             <div class="mt-3">
                                 <small class="text-muted fst-italic">
