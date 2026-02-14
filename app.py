@@ -2,11 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from pymongo import MongoClient
 import os
 
+
+from dotenv import load_dotenv
+load_dotenv() 
+
 app = Flask(__name__)
 
-
 app.secret_key = os.getenv('SECRET_KEY', 'your-super-secret-key-here')
-
 
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
 client = MongoClient(MONGODB_URI)
@@ -34,11 +36,9 @@ def contact():
         return redirect(url_for('contact'))
     return render_template('contact.html')
 
-
 @app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory('static', filename)
-
 
 @app.errorhandler(404)
 def page_not_found(e):
