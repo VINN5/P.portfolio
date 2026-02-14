@@ -118,6 +118,15 @@
                                 <i class="fab fa-github"></i> Code
                             </a>
                             {% endif %}
+
+                            <!-- Show private repo note if present -->
+                            {% if project.note %}
+                            <div class="mt-3">
+                                <small class="text-muted fst-italic">
+                                    {{ project.note }}
+                                </small>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
