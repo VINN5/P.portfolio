@@ -88,7 +88,12 @@
             <p class="lead text-muted">Here are some of the projects I've built with passion and precision.</p>
         </div>
 
-        <div class="row g-4">
+        {% if projects|length == 0 %}
+        <div class="text-center py-5">
+            <p class="text-muted fs-4">No projects added yet. Coming soon!</p>
+        </div>
+        {% else %}
+        <div class="row g-4 justify-content-center">
             {% for project in projects %}
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 shadow-sm border-0 overflow-hidden">
@@ -118,25 +123,8 @@
                 </div>
             </div>
             {% endfor %}
-
-           
-            {% if projects|length < 6 %}
-                {% set placeholders_needed = 6 - projects|length %}
-                {% for _ in range(placeholders_needed) %}
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm border-0 opacity-50">
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
-                            <i class="fas fa-laptop-code fa-4x text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Coming Soon...</h5>
-                            <p class="card-text text-muted">Exciting new project in development.</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            {% endif %}
         </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
