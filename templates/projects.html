@@ -88,6 +88,11 @@
             <p class="lead text-muted">Here are some of the projects I've built with passion and precision.</p>
         </div>
 
+        {% if projects|length == 0 %}
+        <div class="text-center py-5">
+            <p class="text-muted fs-4">No projects added yet. Coming soon!</p>
+        </div>
+        {% else %}
         <div class="row g-4 justify-content-center">
             {% for project in projects %}
             <div class="col-lg-4 col-md-6">
@@ -145,6 +150,7 @@
                 {% endfor %}
             {% endif %}
         </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
