@@ -9,10 +9,19 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv('SECRET_KEY', 'your-super-secret-key-here')
 
-# MongoDB Connection
-MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
-client = MongoClient(MONGODB_URI)
-db = client['portfolio_db']
+# MongoDB Connection with better error handling
+MONGODB_URI = os.getenv('MONGODB_URI')
+if not MONGODB_URI:
+    MONGODB_URI = 'mongodb://localhost:27017/'
+
+try:
+    client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+    client.server_info()  # Test connection
+    db = client['portfolio_db']
+    print("✅ MongoDB connected successfully")
+except Exception as e:
+    print("❌ MongoDB connection failed:", e)
+    db = None
 
 @app.route('/')
 def home():
@@ -20,12 +29,17 @@ def home():
 
 @app.route('/projects')
 def projects():
+    if db is None:
+        return "Database connection failed. Please check MONGODB_URI in Render environment variables.", 500
     projects_list = list(db.projects.find())
     return render_template('projects.html', projects=projects_list)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
+        if db is None:
+            flash('Database connection error. Please try again later.', 'danger')
+            return redirect(url_for('contact'))
         contact_data = {
             'name': request.form['name'],
             'email': request.form['email'],
