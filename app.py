@@ -2,17 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from pymongo import MongoClient
 import os
 
-
 from dotenv import load_dotenv
-load_dotenv() 
+load_dotenv()
 
 app = Flask(__name__)
 
 app.secret_key = os.getenv('SECRET_KEY', 'your-super-secret-key-here')
 
+# MongoDB Connection
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
 client = MongoClient(MONGODB_URI)
-db = client['portfolio_db']  
+db = client['portfolio_db']
 
 @app.route('/')
 def home():
@@ -45,4 +45,4 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=3000)
