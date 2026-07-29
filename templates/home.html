@@ -69,8 +69,101 @@
             font-size: 0.95rem !important;
         }
     }
+
+    /* What I Do cards */
+    .capability-card {
+        border-radius: 16px;
+        padding: 2rem 1.75rem;
+        height: 100%;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .capability-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .capability-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .capability-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+
+    .capability-card p {
+        font-size: 0.95rem;
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+
+    /* Technologies section */
+    .tech-group h4 {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #6c757d;
+    }
+
+    .tech-badge {
+        display: inline-block;
+        padding: 0.4rem 0.9rem;
+        margin: 0 0.4rem 0.6rem 0;
+        border-radius: 999px;
+        background: #f1f3f5;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #343a40;
+    }
+
+    /* Timeline */
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+        border-left: 2px solid rgba(0,0,0,0.08);
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+        padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -2.44rem;
+        top: 0.25rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--bs-primary, #6366f1);
+    }
+
+    .timeline-item h4 {
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .timeline-item .timeline-meta {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
 </style>
 
+<!-- Hero -->
 <section class="hero">
     <div class="dotted-circle"></div>
     <div class="container">
@@ -80,54 +173,246 @@
                     <i class="fas fa-map-marker-alt me-2"></i>Nairobi, Kenya
                 </p>
                 <h1 class="display-3 fw-bold mb-4">
-                    I Build <span class="gradient-text">Custom Web Solutions</span><br>
-                    That Help Your <span class="gradient-text">Business Grow</span>
+                    Building <span class="gradient-text">Intelligent Software</span><br>
+                    for <span class="gradient-text">Real-World Impact</span>
                 </h1>
                 <p class="lead mb-5">
-                    Turning ideas into high-performance digital experiences.
+                    Software Engineer specialising in AI-powered applications, enterprise systems,
+                    offline-first mobile platforms, and scalable backend architecture.
                 </p>
 
                 <div class="d-flex flex-wrap justify-content-lg-start justify-content-center gap-3">
-                    <a href="/projects" class="btn btn-primary btn-lg">See my work</a>
-                    <a href="/contact" class="btn btn-outline-primary btn-lg">Start a project</a>
-                    <a href="{{ url_for('static', filename='files/resume.pdf') }}" 
+                    <a href="/projects" class="btn btn-primary btn-lg">View Projects</a>
+                    <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
+                    <a href="{{ url_for('static', filename='files/resume.pdf') }}"
                        class="btn btn-resume btn-lg" download>
-                        <i class="fas fa-download me-2"></i>Resume
+                        <i class="fas fa-download me-2"></i>Download Resume
                     </a>
                 </div>
             </div>
 
             <div class="col-lg-6 order-lg-2 order-1 text-center mb-5 mb-lg-0">
-                <img src="{{ url_for('static', filename='images/me.jpg') }}" 
-                     alt="Vinn Wambui" 
+                <img src="{{ url_for('static', filename='images/me.jpg') }}"
+                     alt="Vinn Wambui"
                      class="profile-img">
             </div>
         </div>
     </div>
 </section>
 
-<!-- About Me Section -->
+<!-- What I Do -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-3">What I Do</h2>
+                <p class="lead text-muted">
+                    I design and build software across the full stack &mdash; from intelligent
+                    backend systems to the interfaces people actually use.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="capability-card">
+                    <div class="capability-icon">🖥️</div>
+                    <h3>Full-Stack Development</h3>
+                    <p>Modern web applications using React, FastAPI, Node.js, PostgreSQL and TypeScript.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="capability-card">
+                    <div class="capability-icon">🤖</div>
+                    <h3>AI Solutions</h3>
+                    <p>RAG systems, intelligent search, document processing and AI-powered automation.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="capability-card">
+                    <div class="capability-icon">📱</div>
+                    <h3>Mobile Development</h3>
+                    <p>Offline-first Android applications built with Kotlin for challenging field environments.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="capability-card">
+                    <div class="capability-icon">🏗️</div>
+                    <h3>Systems Architecture</h3>
+                    <p>Designing scalable enterprise platforms, APIs and multi-tenant software solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 text-center">
                 <h2 class="display-5 fw-bold mb-4">About Me</h2>
                 <p class="lead text-muted mb-4">
-                    Hi, I'm Vinn, a Computer Science graduate based in Nairobi, Kenya.
+                    I'm a Software Engineer passionate about designing software that solves meaningful problems.
                 </p>
                 <p class="text-muted fs-5">
-                    I specialize in full-stack web development, building modern, responsive applications from end to end. 
-                    My expertise includes <strong>React</strong>, <strong>Node.js</strong>, <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and <strong>PostgreSQL</strong> on the backend and frontend technologies, alongside Python/Flask and MongoDB for rapid prototyping and scalable solutions.
+                    My work spans full-stack development, AI-powered applications, enterprise platforms,
+                    and offline-first mobile systems. I enjoy turning complex business challenges into
+                    practical, scalable solutions by combining thoughtful system architecture with clean,
+                    maintainable code.
                 </p>
                 <p class="text-muted fs-5">
-                    I'm passionate about creating digital products that solve real-world problems whether it's seamless booking systems with MPesa integration or clean, user-focused interfaces.
-                </p>
-                <p class="text-muted fs-5">
-                    When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and being part of Nairobi's growing tech community.
+                    I work across the entire software lifecycle &mdash; from requirements gathering and system
+                    design to backend development, APIs, databases, frontend interfaces, and deployment.
+                    Whether developing intelligent document systems, field data collection platforms, or
+                    business applications, I focus on building software that is reliable, intuitive, and
+                    built to scale.
                 </p>
                 <p class="text-muted fs-5 mt-4">
-                    Let's build something amazing together.
+                    I'm driven by continuous learning and enjoy exploring emerging technologies, particularly
+                    in artificial intelligence, enterprise software, and distributed systems.
                 </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-3">Technologies</h2>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3 tech-group">
+                <h4>Frontend</h4>
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">Tailwind CSS</span>
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+            </div>
+            <div class="col-md-6 col-lg-3 tech-group">
+                <h4>Backend</h4>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">Flask</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">MongoDB</span>
+            </div>
+            <div class="col-md-6 col-lg-3 tech-group">
+                <h4>Mobile</h4>
+                <span class="tech-badge">Kotlin</span>
+                <span class="tech-badge">Android</span>
+            </div>
+            <div class="col-md-6 col-lg-3 tech-group">
+                <h4>AI</h4>
+                <span class="tech-badge">RAG</span>
+                <span class="tech-badge">Vector Search</span>
+                <span class="tech-badge">LLM Integration</span>
+                <span class="tech-badge">Prompt Engineering</span>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-md-6 col-lg-3 tech-group">
+                <h4>Tools</h4>
+                <span class="tech-badge">Git</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">Linux</span>
+                <span class="tech-badge">REST APIs</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-3">Featured Projects</h2>
+                <p class="lead text-muted">A few systems that show how I build.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="capability-card">
+                    <h3>ORRBIT</h3>
+                    <p>A RAG-powered knowledge platform for intelligent document search and retrieval.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="capability-card">
+                    <h3>AgroWeather</h3>
+                    <p>A bilingual AI-driven farming dashboard serving smallholder farmers across Kenya.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="capability-card">
+                    <h3>MatSched</h3>
+                    <p>A fleet scheduling SaaS platform with integrated M-Pesa payments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-auto">
+                <a href="/projects" class="btn btn-primary btn-lg">See All Projects</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience / Journey -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-3">Experience &amp; Journey</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Education</h4>
+                        <p class="timeline-meta">Kirinyaga University &middot; BSc Computer Science &middot; 2024</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Astryx Dynamics</h4>
+                        <p class="timeline-meta">IT Support Specialist &amp; Software Developer &middot; Nov 2025 &ndash; May 2026</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Major Projects</h4>
+                        <p class="timeline-meta">ORRBIT &middot; AgroWeather &middot; MatSched &middot; StockFlow &middot; Summit Wheels &middot; SwiftMall</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Current Focus</h4>
+                        <p class="timeline-meta">AI-powered systems, enterprise platforms, and offline-first mobile applications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-7">
+                <h2 class="display-5 fw-bold mb-3">Let's Build Something Together</h2>
+                <p class="lead text-muted mb-4">
+                    Looking for a software engineer who enjoys solving complex problems and building
+                    scalable systems? Let's connect.
+                </p>
+                <a href="/contact" class="btn btn-primary btn-lg">Contact Me</a>
             </div>
         </div>
     </div>
