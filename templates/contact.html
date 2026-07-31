@@ -3,121 +3,146 @@
 
 {% block content %}
 <style>
-    /* Mobile-specific adjustments for contact page */
-    .contact-icon-btn {
-        width: 120px;
-        height: 120px;
+    .contact-section {
+        padding-top: 120px;
+        padding-bottom: 80px;
+        min-height: 90vh;
+    }
+
+    .contact-card {
+        background: white;
+        border-radius: 24px;
+        padding: 2rem 1.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(59, 130, 246, 0.12);
+        border-color: transparent;
+    }
+
+    .contact-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
     }
 
-    .contact-icon-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    .icon-email {
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+    .icon-github {
+        background: #f1f5f9;
+        color: #0f172a;
+    }
+
+    .icon-linkedin {
+        background: #eff6ff;
+        color: #0a66c2;
+    }
+
+    .icon-whatsapp {
+        background: #f0fdf4;
+        color: #16a34a;
+    }
+
+    .contact-card h5 {
+        font-weight: 700;
+        margin-bottom: 0.35rem;
+        color: #0f172a;
+    }
+
+    .contact-card p {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 0;
+    }
+
+    .contact-subtitle {
+        max-width: 540px;
+        margin: 0 auto 3rem;
     }
 
     @media (max-width: 767.98px) {
-        section.py-5 {
-            padding-top: 100px !important;
+        .contact-section {
+            padding-top: 100px;
         }
 
-        .display-4 {
+        .display-5 {
             font-size: 2rem !important;
-        }
-
-        .lead {
-            font-size: 1rem !important;
-            margin-bottom: 2.5rem !important;
-        }
-
-        .contact-icon-btn {
-            width: 90px;
-            height: 90px;
-            padding: 0 !important;
-        }
-
-        .contact-icon-btn i {
-            font-size: 2rem !important;
-        }
-
-        .d-flex.gap-5 {
-            gap: 1.5rem !important;
-        }
-    }
-
-    @media (max-width: 575.98px) {
-        section.py-5 {
-            padding-top: 90px !important;
-        }
-
-        .display-4 {
-            font-size: 1.75rem !important;
-            margin-bottom: 1rem !important;
-        }
-
-        .lead {
-            font-size: 0.95rem !important;
-            margin-bottom: 2rem !important;
-            padding: 0 1rem;
-        }
-
-        .contact-icon-btn {
-            width: 75px;
-            height: 75px;
-        }
-
-        .contact-icon-btn i {
-            font-size: 1.75rem !important;
-        }
-
-        .d-flex.gap-5 {
-            gap: 1rem !important;
-        }
-
-        .col-lg-8 {
-            padding: 0 1.5rem;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .contact-icon-btn {
-            width: 65px;
-            height: 65px;
-        }
-
-        .contact-icon-btn i {
-            font-size: 1.5rem !important;
-        }
-
-        .d-flex.gap-5 {
-            gap: 0.75rem !important;
         }
     }
 </style>
 
-<section class="py-5 mt-5 min-vh-100 d-flex align-items-center">
+<section class="contact-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h1 class="display-4 fw-bold mb-4">Let's Connect</h1>
-                <p class="lead text-muted mb-5">Reach out directly — I'm always open to new opportunities.</p>
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold mb-3">Let's Build Something Meaningful</h1>
+            <p class="lead text-muted contact-subtitle">
+                Whether you have a project, a collaboration idea, a job opportunity, 
+                or simply want to say hello — I'd love to hear from you.
+            </p>
+            <p class="text-muted small">
+                <i class="fas fa-clock me-1"></i> Usually responds within 24 hours
+            </p>
+        </div>
 
-                <div class="d-flex justify-content-center gap-5 flex-wrap">
-                    <a href="mailto:vinnwambui2@gmail.com" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="Email">
-                        <i class="fas fa-envelope fa-3x"></i>
-                    </a>
-                    <a href="https://github.com/VINN5" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="GitHub">
-                        <i class="fab fa-github fa-3x"></i>
-                    </a>
-                    <a href="https://wa.me/254759270210" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="WhatsApp">
-                        <i class="fab fa-whatsapp fa-3x"></i>
-                    </a>
-                    <a href="tel:+254759270210" class="btn btn-outline-dark btn-lg rounded-circle contact-icon-btn" title="Call">
-                        <i class="fas fa-phone fa-3x"></i>
-                    </a>
-                </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Email -->
+            <div class="col-md-6 col-lg-5">
+                <a href="mailto:vinnwambui2@gmail.com" class="contact-card">
+                    <div class="contact-icon icon-email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h5>Email</h5>
+                    <p>vinnwambui2@gmail.com<br>Professional communication</p>
+                </a>
+            </div>
+
+            <!-- GitHub -->
+            <div class="col-md-6 col-lg-5">
+                <a href="https://github.com/VINN5" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h5>GitHub</h5>
+                    <p>View projects and source code</p>
+                </a>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="col-md-6 col-lg-5">
+                <a href="https://linkedin.com/in/vinnwambugu" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <h5>LinkedIn</h5>
+                    <p>Connect professionally</p>
+                </a>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="col-md-6 col-lg-5">
+                <a href="https://wa.me/254759270210" target="_blank" class="contact-card">
+                    <div class="contact-icon icon-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h5>WhatsApp</h5>
+                    <p>+254 759 270 210<br>Quick conversations</p>
+                </a>
             </div>
         </div>
     </div>
