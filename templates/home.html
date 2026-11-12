@@ -82,17 +82,28 @@
     .hero-portrait-wrap {
         position: relative;
         display: inline-block;
+        /* Soft outer glow ring */
+        padding: 6px;
+        border-radius: 28px;
+        background: linear-gradient(
+            145deg,
+            rgba(139, 169, 197, 0.35),
+            rgba(36, 90, 155, 0.15) 50%,
+            rgba(139, 169, 197, 0.08)
+        );
+        box-shadow: 0 28px 56px rgba(4, 10, 20, 0.45);
     }
 
     .hero-portrait {
-        width: min(380px, 100%);
-        aspect-ratio: 1;
+        display: block;
+        width: min(340px, 78vw);
+        aspect-ratio: 4 / 5;
         object-fit: cover;
-        border-radius: 50%;
-        border: 8px solid var(--surface);
-        box-shadow:
-            0 0 0 1px var(--border-strong),
-            0 24px 56px rgba(4, 10, 20, 0.5);
+        /* Bias crop toward face (upper-middle of typical outdoor portraits) */
+        object-position: center 22%;
+        border-radius: 22px;
+        border: 3px solid var(--surface);
+        background: var(--navy-deep);
     }
 
     .hero-location {
@@ -291,10 +302,12 @@
             padding-bottom: 2.5rem;
         }
 
+        .hero-portrait-wrap {
+            margin-bottom: 0.5rem;
+        }
+
         .hero-portrait {
-            width: min(280px, 72vw);
-            border-width: 6px;
-            margin-bottom: 1.5rem;
+            width: min(260px, 62vw);
         }
     }
 
@@ -321,6 +334,19 @@
         .section-title {
             font-size: 1.75rem !important;
         }
+
+        .hero-portrait {
+            width: min(220px, 58vw);
+        }
+
+        .hero-portrait-wrap {
+            border-radius: 22px;
+            padding: 5px;
+        }
+
+        .hero-portrait {
+            border-radius: 18px;
+        }
     }
 
     @media (max-width: 575.98px) {
@@ -330,8 +356,7 @@
         }
 
         .hero-portrait {
-            width: min(220px, 68vw);
-            border-width: 5px;
+            width: min(200px, 55vw);
         }
 
         .hero h1 {
@@ -345,7 +370,7 @@
 
     @media (max-width: 400px) {
         .hero-portrait {
-            width: 180px;
+            width: 170px;
         }
 
         .hero h1 {
