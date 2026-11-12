@@ -1,149 +1,243 @@
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Home | Vinn Wambui{% endblock %}
 
-{% block content %}
+{% block extra_css %}
 <style>
-    /* Mobile-specific adjustments for home page */
-    @media (max-width: 767.98px) {
-        .hero .row {
-            padding-top: 2rem !important;
-            padding-bottom: 2rem !important;
-        }
-
-        .hero h1 br {
-            display: none;
-        }
-
-        .hero .d-flex {
-            flex-direction: column;
-        }
-
-        .hero .btn {
-            width: 100%;
-        }
-
-        section.bg-light {
-            padding: 3rem 0 !important;
-        }
-
-        section.bg-light .display-5 {
-            font-size: 2rem !important;
-        }
-
-        section.bg-light .lead {
-            font-size: 1.1rem !important;
-            margin-bottom: 1.5rem !important;
-        }
-
-        section.bg-light .fs-5 {
-            font-size: 1rem !important;
-            text-align: left !important;
-        }
-
-        section.bg-light .col-lg-8 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
+    /* ---------- HERO ---------- */
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-top: 5.5rem;
+        padding-bottom: 3rem;
+        overflow: hidden;
     }
 
-    @media (max-width: 575.98px) {
-        .hero {
-            padding-top: 80px !important;
-            padding-bottom: 30px !important;
-        }
-
-        .hero .min-vh-100 {
-            min-height: auto !important;
-        }
-
-        section.bg-light .display-5 {
-            font-size: 1.75rem !important;
-            margin-bottom: 1.5rem !important;
-        }
-
-        section.bg-light .lead {
-            font-size: 1rem !important;
-        }
-
-        section.bg-light .fs-5 {
-            font-size: 0.95rem !important;
-        }
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 50% at 85% 20%, rgba(36, 90, 155, 0.18), transparent 60%);
+        pointer-events: none;
     }
 
-    /* What I Do cards */
+    .hero-identity {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--stone-blue);
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-identity .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--scarlet-red);
+        flex-shrink: 0;
+    }
+
+    .hero-name {
+        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        font-weight: 600;
+        color: var(--soft-ivory);
+        letter-spacing: 0.02em;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.8px;
+        font-size: clamp(1.85rem, 4.2vw, 3.1rem);
+        margin-bottom: 1.35rem;
+        color: var(--soft-ivory);
+    }
+
+    .hero h1 .accent {
+        color: var(--stone-blue);
+    }
+
+    .hero-lead {
+        font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+        font-weight: 400;
+        color: var(--stone-blue);
+        max-width: 32rem;
+        margin-bottom: 2rem;
+        line-height: 1.65;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        align-items: center;
+    }
+
+    .hero-portrait-wrap {
+        position: relative;
+        display: inline-block;
+    }
+
+    .hero-portrait {
+        width: min(380px, 100%);
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 8px solid var(--surface);
+        box-shadow:
+            0 0 0 1px var(--border-strong),
+            0 24px 56px rgba(4, 10, 20, 0.5);
+    }
+
+    .hero-location {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--stone-blue);
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    /* ---------- CAPABILITY CARDS ---------- */
     .capability-card {
-        border-radius: 16px;
-        padding: 2rem 1.75rem;
+        border-radius: var(--radius-md);
+        padding: 1.75rem 1.5rem;
         height: 100%;
         background: var(--surface);
         border: 1px solid var(--border);
         box-shadow: var(--shadow-soft);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
     }
 
     .capability-card:hover {
-        transform: translateY(-6px);
+        transform: translateY(-5px);
         background: var(--surface-hover);
-        border-color: var(--stone-blue);
+        border-color: rgba(139, 169, 197, 0.35);
         box-shadow: var(--shadow-lift);
     }
 
     .capability-icon {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        margin-bottom: 1.1rem;
+        background: rgba(36, 90, 155, 0.18);
+        color: var(--stone-blue);
     }
 
     .capability-card h3 {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         font-weight: 700;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.55rem;
         color: var(--soft-ivory);
     }
 
     .capability-card p {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         color: var(--stone-blue);
         margin-bottom: 0;
+        line-height: 1.55;
     }
 
-    /* Technologies section */
+    /* ---------- ABOUT ---------- */
+    .about-text {
+        font-size: 1.05rem;
+        color: var(--stone-blue);
+        line-height: 1.75;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-text p + p {
+        margin-top: 1.15rem;
+    }
+
+    /* ---------- TECHNOLOGIES ---------- */
     .tech-group h4 {
-        font-size: 0.95rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.07em;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 0.9rem;
         color: var(--stone-blue);
     }
 
     .tech-badge {
         display: inline-block;
-        padding: 0.4rem 0.9rem;
-        margin: 0 0.4rem 0.6rem 0;
-        border-radius: 999px;
-        background: rgba(36, 90, 155, 0.22);
+        padding: 0.38rem 0.85rem;
+        margin: 0 0.35rem 0.5rem 0;
+        border-radius: var(--radius-pill);
+        background: rgba(36, 90, 155, 0.2);
         border: 1px solid var(--border);
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         font-weight: 500;
         color: var(--soft-ivory);
         transition: border-color 0.2s ease, background-color 0.2s ease;
     }
 
     .tech-badge:hover {
-        background: rgba(36, 90, 155, 0.4);
+        background: rgba(36, 90, 155, 0.35);
         border-color: var(--stone-blue);
     }
 
-    /* Timeline */
+    /* ---------- FEATURED PROJECT CARDS ---------- */
+    .project-preview-card {
+        border-radius: var(--radius-md);
+        padding: 1.75rem 1.5rem;
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-preview-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(139, 169, 197, 0.35);
+        box-shadow: var(--shadow-lift);
+    }
+
+    .project-preview-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+        color: var(--soft-ivory);
+    }
+
+    .project-preview-card p {
+        font-size: 0.95rem;
+        color: var(--stone-blue);
+        margin-bottom: 0;
+        line-height: 1.55;
+        flex-grow: 1;
+    }
+
+    /* ---------- TIMELINE ---------- */
     .timeline {
         position: relative;
-        padding-left: 2rem;
+        padding-left: 1.75rem;
         border-left: 2px solid var(--border-strong);
+        max-width: 36rem;
+        margin: 0 auto;
     }
 
     .timeline-item {
         position: relative;
-        padding-bottom: 2rem;
+        padding-bottom: 1.85rem;
     }
 
     .timeline-item:last-child {
@@ -153,79 +247,165 @@
     .timeline-item::before {
         content: '';
         position: absolute;
-        left: -2.44rem;
-        top: 0.25rem;
-        width: 12px;
-        height: 12px;
+        left: -2.1rem;
+        top: 0.35rem;
+        width: 11px;
+        height: 11px;
         border-radius: 50%;
         background: var(--egyptian-blue);
         border: 2px solid var(--stone-blue);
     }
 
-    /* Current focus = active indicator */
-    .timeline-item:last-child::before {
+    .timeline-item.current::before {
         background: var(--scarlet-red);
         border-color: var(--scarlet-red);
     }
 
     .timeline-item h4 {
         font-weight: 700;
-        margin-bottom: 0.25rem;
+        font-size: 1.05rem;
+        margin-bottom: 0.2rem;
         color: var(--soft-ivory);
     }
 
-    .timeline-item .timeline-meta {
-        font-size: 0.85rem;
+    .timeline-meta {
+        font-size: 0.88rem;
         color: var(--stone-blue);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
+    }
+
+    /* ---------- CTA BAND ---------- */
+    .cta-band {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+        text-align: center;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 991.98px) {
+        .hero {
+            min-height: auto;
+            padding-top: 6rem;
+            padding-bottom: 2.5rem;
+        }
+
+        .hero-portrait {
+            width: min(280px, 72vw);
+            border-width: 6px;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .hero h1 {
+            font-size: 1.85rem;
+        }
+
+        .hero-lead {
+            font-size: 1.05rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .hero-actions .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.75rem !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .hero {
+            padding-top: 5.25rem;
+            padding-bottom: 2rem;
+        }
+
+        .hero-portrait {
+            width: min(220px, 68vw);
+            border-width: 5px;
+        }
+
+        .hero h1 {
+            font-size: 1.65rem;
+        }
+
+        .hero-lead {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .hero-portrait {
+            width: 180px;
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+        }
     }
 </style>
+{% endblock %}
 
+{% block content %}
 <!-- Hero -->
 <section class="hero">
-    <div class="dotted-circle"></div>
     <div class="container">
-        <div class="row align-items-center min-vh-100 py-5">
+        <div class="row align-items-center gy-5">
             <div class="col-lg-6 order-lg-1 order-2 text-lg-start text-center">
-                <p class="location mb-3">
-                    <i class="fas fa-map-marker-alt me-2"></i>Nairobi, Kenya
-                </p>
-                <h1 class="display-3 fw-bold mb-4">
-                    Building <span class="gradient-text">Intelligent Software</span><br>
-                    for <span class="gradient-text">Real-World Impact</span>
+                <div class="hero-identity">
+                    <span class="dot"></span>
+                    Software Engineer · Nairobi, Kenya
+                </div>
+                <p class="hero-name">VINN WAMBUI</p>
+                <h1>
+                    Building software that<br class="d-none d-md-inline">
+                    solves <span class="accent">real-world problems</span>.
                 </h1>
-                <p class="lead mb-5">
-                    Software Engineer specialising in AI-powered applications, enterprise systems,
-                    offline-first mobile platforms, and scalable backend architecture.
+                <p class="hero-lead">
+                    I engineer intelligent applications, reliable backend systems,
+                    and scalable platforms that turn complex challenges into practical solutions.
                 </p>
-
-                <div class="d-flex flex-wrap justify-content-lg-start justify-content-center gap-3">
-                    <a href="/projects" class="btn btn-accent btn-lg">View Projects</a>
-                    <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
+                <div class="hero-actions justify-content-lg-start justify-content-center">
+                    <a href="/projects" class="btn btn-accent">View Projects</a>
+                    <a href="/contact" class="btn btn-outline-primary">Contact Me</a>
                     <a href="{{ url_for('static', filename='files/resume.pdf') }}"
-                       class="btn btn-resume btn-lg" download>
-                        <i class="fas fa-download me-2"></i>Download Resume
+                       class="btn btn-resume" download>
+                        <i class="fas fa-download me-2"></i>Resume
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-6 order-lg-2 order-1 text-center mb-5 mb-lg-0">
-                <img src="{{ url_for('static', filename='images/me.jpg') }}"
-                     alt="Vinn Wambui"
-                     class="profile-img">
+            <div class="col-lg-6 order-lg-2 order-1 text-center">
+                <div class="hero-portrait-wrap">
+                    <img src="{{ url_for('static', filename='images/me.jpg') }}"
+                         alt="Vinn Wambui"
+                         class="hero-portrait"
+                         width="380"
+                         height="380">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- What I Do -->
-<section class="py-5">
+<section class="py-5" style="padding-top: var(--space-section); padding-bottom: var(--space-section);">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">What I Do</h2>
-                <p class="lead text-muted">
-                    I design and build software across the full stack &mdash; from intelligent
+                <span class="section-label">Capabilities</span>
+                <h2 class="display-5 section-title mb-3">What I Do</h2>
+                <p class="section-lead mx-auto">
+                    I design and build software across the full stack — from intelligent
                     backend systems to the interfaces people actually use.
                 </p>
             </div>
@@ -234,28 +414,28 @@
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <div class="capability-card">
-                    <div class="capability-icon">🖥️</div>
+                    <div class="capability-icon"><i class="fas fa-layer-group"></i></div>
                     <h3>Full-Stack Development</h3>
                     <p>Modern web applications using React, FastAPI, Node.js, PostgreSQL and TypeScript.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="capability-card">
-                    <div class="capability-icon">🤖</div>
+                    <div class="capability-icon"><i class="fas fa-brain"></i></div>
                     <h3>AI Solutions</h3>
                     <p>RAG systems, intelligent search, document processing and AI-powered automation.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="capability-card">
-                    <div class="capability-icon">📱</div>
+                    <div class="capability-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>Mobile Development</h3>
                     <p>Offline-first Android applications built with Kotlin for challenging field environments.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="capability-card">
-                    <div class="capability-icon">🏗️</div>
+                    <div class="capability-icon"><i class="fas fa-sitemap"></i></div>
                     <h3>Systems Architecture</h3>
                     <p>Designing scalable enterprise platforms, APIs and multi-tenant software solutions.</p>
                 </div>
@@ -265,55 +445,56 @@
 </section>
 
 <!-- About Me -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-light" style="padding-top: var(--space-section); padding-bottom: var(--space-section);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 text-center">
-                <h2 class="display-5 fw-bold mb-4">About Me</h2>
-                <p class="lead text-muted mb-4">
-                    I'm a Software Engineer passionate about designing software that solves meaningful problems.
-                </p>
-                <p class="text-muted fs-5">
-                    My work spans full-stack development, AI-powered applications, enterprise platforms,
-                    and offline-first mobile systems. I enjoy turning complex business challenges into
-                    practical, scalable solutions by combining thoughtful system architecture with clean,
-                    maintainable code.
-                </p>
-                <p class="text-muted fs-5">
-                    I work across the entire software lifecycle &mdash; from requirements gathering and system
-                    design to backend development, APIs, databases, frontend interfaces, and deployment.
-                    Whether developing intelligent document systems, field data collection platforms, or
-                    business applications, I focus on building software that is reliable, intuitive, and
-                    built to scale.
-                </p>
-                <p class="text-muted fs-5 mt-4">
-                    I'm driven by continuous learning and enjoy exploring emerging technologies, particularly
-                    in artificial intelligence, enterprise software, and distributed systems.
-                </p>
+                <span class="section-label">About</span>
+                <h2 class="display-5 section-title mb-4">About Me</h2>
+                <div class="about-text">
+                    <p>
+                        I'm a Software Engineer passionate about designing software that solves meaningful problems.
+                        My work spans full-stack development, AI-powered applications, enterprise platforms,
+                        and offline-first mobile systems.
+                    </p>
+                    <p>
+                        I enjoy turning complex business challenges into practical, scalable solutions by combining
+                        thoughtful system architecture with clean, maintainable code. I work across the entire
+                        software lifecycle — from requirements and system design to backend development, APIs,
+                        databases, frontend interfaces, and deployment.
+                    </p>
+                    <p>
+                        Whether developing intelligent document systems, field data collection platforms, or
+                        business applications, I focus on building software that is reliable, intuitive, and
+                        built to scale. I'm driven by continuous learning and enjoy exploring emerging technologies,
+                        particularly in artificial intelligence, enterprise software, and distributed systems.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Technologies -->
-<section class="py-5">
+<section class="py-5" style="padding-top: var(--space-section); padding-bottom: var(--space-section);">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">Technologies</h2>
+                <span class="section-label">Stack</span>
+                <h2 class="display-5 section-title mb-0">Technologies</h2>
             </div>
         </div>
 
         <div class="row g-4">
-            <div class="col-md-6 col-lg-3 tech-group">
+            <div class="col-6 col-md-4 col-lg-2 tech-group">
                 <h4>Frontend</h4>
                 <span class="tech-badge">React</span>
                 <span class="tech-badge">TypeScript</span>
-                <span class="tech-badge">Tailwind CSS</span>
+                <span class="tech-badge">Tailwind</span>
                 <span class="tech-badge">HTML</span>
                 <span class="tech-badge">CSS</span>
             </div>
-            <div class="col-md-6 col-lg-3 tech-group">
+            <div class="col-6 col-md-4 col-lg-2 tech-group">
                 <h4>Backend</h4>
                 <span class="tech-badge">FastAPI</span>
                 <span class="tech-badge">Flask</span>
@@ -321,22 +502,19 @@
                 <span class="tech-badge">PostgreSQL</span>
                 <span class="tech-badge">MongoDB</span>
             </div>
-            <div class="col-md-6 col-lg-3 tech-group">
+            <div class="col-6 col-md-4 col-lg-2 tech-group">
                 <h4>Mobile</h4>
                 <span class="tech-badge">Kotlin</span>
                 <span class="tech-badge">Android</span>
             </div>
-            <div class="col-md-6 col-lg-3 tech-group">
+            <div class="col-6 col-md-4 col-lg-2 tech-group">
                 <h4>AI</h4>
                 <span class="tech-badge">RAG</span>
                 <span class="tech-badge">Vector Search</span>
                 <span class="tech-badge">LLM Integration</span>
-                <span class="tech-badge">Prompt Engineering</span>
+                <span class="tech-badge">Prompt Eng.</span>
             </div>
-        </div>
-
-        <div class="row g-4 mt-1">
-            <div class="col-md-6 col-lg-3 tech-group">
+            <div class="col-6 col-md-4 col-lg-2 tech-group">
                 <h4>Tools</h4>
                 <span class="tech-badge">Git</span>
                 <span class="tech-badge">Docker</span>
@@ -348,30 +526,31 @@
 </section>
 
 <!-- Featured Projects -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-light" style="padding-top: var(--space-section); padding-bottom: var(--space-section);">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">Featured Projects</h2>
-                <p class="lead text-muted">A few systems that show how I build.</p>
+                <span class="section-label">Selected Work</span>
+                <h2 class="display-5 section-title mb-3">Featured Projects</h2>
+                <p class="section-lead mx-auto">A few systems that show how I build.</p>
             </div>
         </div>
 
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
-                <div class="capability-card">
+                <div class="project-preview-card">
                     <h3>ORRBIT</h3>
                     <p>A RAG-powered knowledge platform for intelligent document search and retrieval.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
-                <div class="capability-card">
+                <div class="project-preview-card">
                     <h3>AgroWeather</h3>
                     <p>A bilingual AI-driven farming dashboard serving smallholder farmers across Kenya.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
-                <div class="capability-card">
+                <div class="project-preview-card">
                     <h3>MatSched</h3>
                     <p>A fleet scheduling SaaS platform with integrated M-Pesa payments.</p>
                 </div>
@@ -380,57 +559,56 @@
 
         <div class="row justify-content-center mt-5">
             <div class="col-auto">
-                <a href="/projects" class="btn btn-primary btn-lg">See All Projects</a>
+                <a href="/projects" class="btn btn-primary">See All Projects</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Experience / Journey -->
-<section class="py-5">
+<!-- Experience & Journey -->
+<section class="py-5" style="padding-top: var(--space-section); padding-bottom: var(--space-section);">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">Experience &amp; Journey</h2>
+                <span class="section-label">Path</span>
+                <h2 class="display-5 section-title mb-0">Experience &amp; Journey</h2>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Education</h4>
-                        <p class="timeline-meta">Kirinyaga University &middot; BSc Computer Science &middot; 2024</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Astryx Dynamics</h4>
-                        <p class="timeline-meta">IT Support Specialist &amp; Software Developer &middot; Nov 2025 &ndash; May 2026</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Major Projects</h4>
-                        <p class="timeline-meta">ORRBIT &middot; AgroWeather &middot; MatSched &middot; StockFlow &middot; Summit Wheels &middot; SwiftMall</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Current Focus</h4>
-                        <p class="timeline-meta">AI-powered systems, enterprise platforms, and offline-first mobile applications</p>
-                    </div>
-                </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Education</h4>
+                <p class="timeline-meta">Kirinyaga University · BSc Computer Science · 2024</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Astryx Dynamics</h4>
+                <p class="timeline-meta">IT Support Specialist &amp; Software Developer · Nov 2025 – May 2026</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Major Projects</h4>
+                <p class="timeline-meta">ORRBIT · AgroWeather · MatSched · StockFlow · Summit Wheels · SwiftMall</p>
+            </div>
+            <div class="timeline-item current">
+                <h4>Current Focus</h4>
+                <p class="timeline-meta">AI-powered systems, enterprise platforms, and offline-first mobile applications</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="py-5 bg-light">
+<!-- Closing CTA -->
+<section class="py-5" style="padding-top: 2rem; padding-bottom: var(--space-section);">
     <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-7">
-                <h2 class="display-5 fw-bold mb-3">Let's Build Something Together</h2>
-                <p class="lead text-muted mb-4">
-                    Looking for a software engineer who enjoys solving complex problems and building
-                    scalable systems? Let's connect.
-                </p>
-                <a href="/contact" class="btn btn-primary btn-lg">Contact Me</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="cta-band">
+                    <h2 class="display-5 section-title mb-3">Let's Build Something Together</h2>
+                    <p class="section-lead mx-auto mb-4">
+                        Looking for a software engineer who enjoys solving complex problems and building
+                        scalable systems? Let's connect.
+                    </p>
+                    <a href="/contact" class="btn btn-accent">Contact Me</a>
+                </div>
             </div>
         </div>
     </div>

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#101C2C">
-    <title>{% block title %}Vinn Wambui | Portfolio{% endblock %}</title>
+    <meta name="description" content="Vincent Wambugu (VINN) — Software Engineer in Nairobi building AI-powered applications, enterprise systems, and scalable platforms.">
+    <title>{% block title %}Vinn Wambui | Software Engineer{% endblock %}</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,42 +16,44 @@
 
     <style>
         /* ============================================
-           MIDNIGHT INTELLIGENCE - DESIGN TOKENS
-           Change the palette here and nowhere else.
+           MIDNIGHT INTELLIGENCE — DESIGN SYSTEM
            ============================================ */
         :root {
-            /* Brand palette */
             --midnight-navy: #101C2C;
             --egyptian-blue: #245A9B;
             --stone-blue:    #8BA9C5;
             --soft-ivory:    #F1F0EA;
             --scarlet-red:   #E64B4B;
 
-            /* Derived dark surfaces (tints/shades of Midnight Navy) */
             --navy-deep:     #0B1521;
             --surface:       #16263B;
             --surface-hover: #1B3050;
-            --band:          rgba(139, 169, 197, 0.05);
+            --band:          rgba(139, 169, 197, 0.06);
 
-            /* Egyptian Blue interaction shades */
             --egyptian-hover:  #2C6BB3;
             --egyptian-active: #1D4C84;
 
-            /* Semantic roles - components should use these */
-            --bg:           var(--midnight-navy);
-            --text:         var(--soft-ivory);
-            --text-muted:   var(--stone-blue);
-            --brand:        var(--egyptian-blue);
-            --accent:       var(--scarlet-red);
-            --border:       rgba(139, 169, 197, 0.22);
-            --border-strong: rgba(139, 169, 197, 0.45);
-            --shadow-soft:  0 12px 32px rgba(4, 10, 20, 0.35);
-            --shadow-lift:  0 20px 44px rgba(4, 10, 20, 0.5);
+            --bg:            var(--midnight-navy);
+            --text:          var(--soft-ivory);
+            --text-muted:    var(--stone-blue);
+            --brand:         var(--egyptian-blue);
+            --accent:        var(--scarlet-red);
+            --border:        rgba(139, 169, 197, 0.18);
+            --border-strong: rgba(139, 169, 197, 0.38);
+            --shadow-soft:   0 8px 28px rgba(4, 10, 20, 0.32);
+            --shadow-lift:   0 18px 40px rgba(4, 10, 20, 0.48);
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+
+            --space-section: clamp(4rem, 8vw, 6.5rem);
+            --content-max: 1120px;
 
             color-scheme: dark;
         }
 
-        /* Map the tokens onto Bootstrap's own variables */
         :root[data-bs-theme="dark"] {
             --bs-body-bg: var(--midnight-navy);
             --bs-body-bg-rgb: 16, 28, 44;
@@ -61,7 +63,7 @@
             --bs-heading-color: var(--soft-ivory);
             --bs-secondary-color: var(--stone-blue);
             --bs-secondary-color-rgb: 139, 169, 197;
-            --bs-border-color: rgba(139, 169, 197, 0.22);
+            --bs-border-color: var(--border);
             --bs-link-color: var(--stone-blue);
             --bs-link-color-rgb: 139, 169, 197;
             --bs-link-hover-color: var(--soft-ivory);
@@ -70,12 +72,26 @@
             --bs-primary-rgb: 36, 90, 155;
         }
 
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         ::selection {
             background: var(--egyptian-blue);
             color: var(--soft-ivory);
         }
 
-        /* Accessible focus state for every interactive element */
         :focus-visible {
             outline: 2px solid var(--scarlet-red);
             outline-offset: 3px;
@@ -89,14 +105,16 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
-            background: linear-gradient(180deg, var(--midnight-navy) 0%, #0E1826 100%);
+            background-image: linear-gradient(180deg, var(--midnight-navy) 0%, #0E1826 100%);
+            background-attachment: fixed;
             color: var(--text);
             overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Shared overrides so Bootstrap helpers behave on the dark theme */
         .bg-light {
             background-color: var(--band) !important;
         }
@@ -112,44 +130,54 @@
             opacity: 1;
         }
 
-        /* Page entrance animation */
+        .text-muted {
+            color: var(--stone-blue) !important;
+        }
+
         main {
-            animation: fadeIn 0.6s ease;
+            animation: fadeIn 0.55s ease both;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: none;
-            }
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: none; }
         }
 
-        /* Navbar */
+        /* ---------- NAVBAR ---------- */
         .navbar {
             background-color: transparent;
-            transition: all 0.4s ease;
+            transition: background-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
 
         .navbar.scrolled {
-            background-color: rgba(16, 28, 44, 0.92);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 0 var(--border), 0 8px 24px rgba(4, 10, 20, 0.35);
+            background-color: rgba(11, 21, 33, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 1px 0 var(--border), 0 6px 20px rgba(4, 10, 20, 0.35);
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
         }
 
         .navbar-brand {
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.4px;
             color: var(--soft-ivory) !important;
+            font-size: 1.25rem;
+        }
+
+        .navbar-brand span {
+            color: var(--stone-blue);
+            font-weight: 500;
         }
 
         .nav-link {
             position: relative;
             font-weight: 500;
+            font-size: 0.95rem;
             color: var(--stone-blue) !important;
+            padding: 0.5rem 0.9rem !important;
             transition: color 0.2s ease;
         }
 
@@ -158,13 +186,12 @@
             color: var(--soft-ivory) !important;
         }
 
-        /* Scarlet active indicator */
         .nav-link.active::after {
             content: "";
             position: absolute;
             left: 50%;
-            bottom: 2px;
-            width: 20px;
+            bottom: 4px;
+            width: 18px;
             height: 2px;
             border-radius: 2px;
             background: var(--scarlet-red);
@@ -173,6 +200,7 @@
 
         .navbar-toggler {
             border-color: var(--border-strong);
+            padding: 0.4rem 0.55rem;
         }
 
         .navbar-toggler:focus {
@@ -183,67 +211,7 @@
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F1F0EA' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right, rgba(36, 90, 155, 0.22), transparent 50%);
-            pointer-events: none;
-        }
-
-        .dotted-circle {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            width: 560px;
-            height: 560px;
-            border: 2px dotted var(--stone-blue);
-            border-radius: 50%;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .profile-img {
-            width: 420px;
-            height: 420px;
-            max-width: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 10px solid var(--surface);
-            box-shadow: 0 0 0 1px var(--border-strong), 0 30px 70px rgba(4, 10, 20, 0.55);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--stone-blue), var(--soft-ivory));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-
-        h1.display-3 {
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: var(--stone-blue);
-        }
-
-        /* Buttons */
+        /* ---------- BUTTONS ---------- */
         .btn-primary {
             --bs-btn-color: var(--soft-ivory);
             --bs-btn-bg: var(--egyptian-blue);
@@ -254,11 +222,12 @@
             --bs-btn-active-color: var(--soft-ivory);
             --bs-btn-active-bg: var(--egyptian-active);
             --bs-btn-active-border-color: var(--egyptian-active);
-            --bs-btn-border-width: 0px;
-            border-radius: 50px;
-            padding: 14px 32px;
+            --bs-btn-border-width: 0;
+            border-radius: var(--radius-pill);
+            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .btn-primary:hover {
@@ -267,24 +236,24 @@
 
         .btn-outline-primary {
             --bs-btn-color: var(--stone-blue);
-            --bs-btn-border-color: var(--stone-blue);
+            --bs-btn-border-color: var(--border-strong);
             --bs-btn-hover-color: var(--midnight-navy);
-            --bs-btn-hover-bg: var(--stone-blue);
-            --bs-btn-hover-border-color: var(--stone-blue);
+            --bs-btn-hover-bg: var(--soft-ivory);
+            --bs-btn-hover-border-color: var(--soft-ivory);
             --bs-btn-active-color: var(--midnight-navy);
             --bs-btn-active-bg: var(--soft-ivory);
             --bs-btn-active-border-color: var(--soft-ivory);
-            border-radius: 50px;
-            padding: 14px 32px;
+            border-radius: var(--radius-pill);
+            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
         .btn-outline-primary:hover {
             transform: translateY(-2px);
         }
 
-        /* Secondary outline used on project cards (was btn-outline-dark) */
         .btn-outline-dark {
             --bs-btn-color: var(--soft-ivory);
             --bs-btn-border-color: var(--border-strong);
@@ -294,26 +263,27 @@
             --bs-btn-active-color: var(--midnight-navy);
             --bs-btn-active-bg: var(--soft-ivory);
             --bs-btn-active-border-color: var(--soft-ivory);
+            border-radius: var(--radius-pill);
         }
 
         .btn-resume {
-            background-color: transparent;
-            border: 2px solid var(--border-strong);
+            background: transparent;
+            border: 1.5px solid var(--border-strong);
             color: var(--soft-ivory);
-            border-radius: 50px;
-            padding: 14px 32px;
+            border-radius: var(--radius-pill);
+            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
         .btn-resume:hover {
-            background-color: var(--soft-ivory);
+            background: var(--soft-ivory);
             border-color: var(--soft-ivory);
             color: var(--midnight-navy);
             transform: translateY(-2px);
         }
 
-        /* Scarlet CTA - reserve for ONE key action per page */
         .btn-accent {
             --bs-btn-color: var(--midnight-navy);
             --bs-btn-bg: var(--scarlet-red);
@@ -324,34 +294,54 @@
             --bs-btn-active-color: var(--midnight-navy);
             --bs-btn-active-bg: #D13F3F;
             --bs-btn-active-border-color: #D13F3F;
-            --bs-btn-border-width: 0px;
-            border-radius: 50px;
-            padding: 14px 32px;
+            --bs-btn-border-width: 0;
+            border-radius: var(--radius-pill);
+            padding: 0.85rem 1.9rem;
             font-weight: 700;
-            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .btn-accent:hover {
             transform: translateY(-2px);
         }
 
-        .location {
-            color: var(--stone-blue);
-            font-weight: 500;
-            font-size: 1.1rem;
+        /* ---------- SHARED SECTION STYLES ---------- */
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--egyptian-blue);
+            margin-bottom: 0.75rem;
         }
 
-        /* Footer */
+        .section-title {
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            line-height: 1.2;
+            color: var(--soft-ivory);
+        }
+
+        .section-lead {
+            color: var(--stone-blue);
+            font-size: 1.1rem;
+            max-width: 36rem;
+        }
+
+        /* ---------- FOOTER ---------- */
         footer {
             background: var(--navy-deep);
             border-top: 1px solid var(--border);
             color: var(--stone-blue);
-            padding: 3rem 0 2rem;
-            margin-top: 5rem;
+            padding: 3.25rem 0 2.25rem;
+            margin-top: var(--space-section);
         }
 
         footer .footer-title {
             color: var(--soft-ivory);
+            font-weight: 600;
         }
 
         footer a {
@@ -364,153 +354,79 @@
             color: var(--soft-ivory);
         }
 
-        /* ============================================
-           MOBILE RESPONSIVE STYLES
-           ============================================ */
+        footer .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--stone-blue);
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
 
+        footer .social-link:hover {
+            color: var(--soft-ivory);
+            border-color: var(--stone-blue);
+            background: rgba(139, 169, 197, 0.08);
+        }
+
+        /* ---------- RESPONSIVE NAV ---------- */
         @media (max-width: 991.98px) {
             .navbar {
-                background-color: rgba(16, 28, 44, 0.98) !important;
-                box-shadow: 0 1px 0 var(--border), 0 4px 14px rgba(4, 10, 20, 0.4);
+                background-color: rgba(11, 21, 33, 0.97) !important;
+                box-shadow: 0 1px 0 var(--border), 0 4px 14px rgba(4, 10, 20, 0.35);
             }
 
             .navbar-brand {
-                font-size: 1.4rem !important;
+                font-size: 1.2rem !important;
             }
 
             .navbar-nav {
-                padding: 1rem 0;
+                padding: 0.75rem 0 0.5rem;
                 text-align: center;
             }
 
             .navbar-nav .nav-link {
-                padding: 0.7rem 0;
+                padding: 0.65rem 0 !important;
                 font-size: 1.05rem;
             }
 
             .navbar-nav .nav-link.active::after {
-                bottom: 6px;
+                bottom: 8px;
             }
 
             .navbar .btn-primary {
                 width: 100%;
-                margin-top: 1rem;
-            }
-
-            .dotted-circle {
-                width: 400px;
-                height: 400px;
-            }
-
-            .profile-img {
-                width: 320px;
-                height: 320px;
-                border: 8px solid var(--surface);
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .hero {
-                min-height: auto;
-                padding: 100px 0 40px;
-            }
-
-            .dotted-circle {
-                width: 280px;
-                height: 280px;
-                right: -40px;
-                opacity: 0.22;
-            }
-
-            .profile-img {
-                width: 260px;
-                height: 260px;
-                border: 6px solid var(--surface);
-                margin-bottom: 2rem;
-            }
-
-            h1.display-3 {
-                font-size: 2rem !important;
-                line-height: 1.3;
-            }
-
-            .lead {
-                font-size: 1.1rem;
-            }
-
-            .location {
-                font-size: 1rem;
-            }
-
-            .btn-primary,
-            .btn-outline-primary,
-            .btn-resume,
-            .btn-accent {
-                padding: 12px 24px;
-                font-size: 0.95rem;
+                margin-top: 0.75rem;
+                margin-bottom: 0.5rem;
             }
         }
 
         @media (max-width: 575.98px) {
-            .hero {
-                padding: 80px 0 30px;
-            }
-
-            .profile-img {
-                width: 200px;
-                height: 200px;
-                border: 5px solid var(--surface);
-            }
-
-            h1.display-3 {
-                font-size: 1.65rem !important;
-            }
-
-            .lead {
-                font-size: 1rem;
-            }
-
-            .dotted-circle {
-                width: 220px;
-                height: 220px;
-                right: -60px;
-            }
-
             .btn-primary,
             .btn-outline-primary,
             .btn-resume,
             .btn-accent {
-                padding: 10px 20px;
+                padding: 0.7rem 1.35rem;
                 font-size: 0.9rem;
             }
         }
-
-        @media (max-width: 400px) {
-            .profile-img {
-                width: 180px;
-                height: 180px;
-            }
-
-            h1.display-3 {
-                font-size: 1.5rem !important;
-            }
-
-            .navbar-brand {
-                font-size: 1.3rem !important;
-            }
-        }
     </style>
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand fs-4" href="/">VW</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="/">VINN <span>Wambui</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
                     </li>
@@ -520,8 +436,11 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact">Contact</a>
                     </li>
+                    <li class="nav-item d-lg-none">
+                        <a href="/contact" class="btn btn-primary mt-2">Connect</a>
+                    </li>
                 </ul>
-                <a href="/contact" class="btn btn-primary ms-lg-3">Connect</a>
+                <a href="/contact" class="btn btn-primary ms-lg-3 d-none d-lg-inline-block">Connect</a>
             </div>
         </div>
     </nav>
@@ -530,24 +449,25 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <p class="mb-1 fw-medium footer-title">Let's build something meaningful.</p>
-                    <p class="mb-0 small">© 2026 Vincent Wambugu. All rights reserved.</p>
+            <div class="row align-items-center gy-4">
+                <div class="col-md-7">
+                    <p class="mb-1 footer-title">Let's build something meaningful.</p>
+                    <p class="mb-0 small opacity-75">© 2026 Vincent Wambugu. All rights reserved.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="https://github.com/VINN5" target="_blank" class="me-3">
-                        <i class="fab fa-github fa-lg"></i>
-                    </a>
-                    <a href="mailto:vinnwambui2@gmail.com" class="me-3">
-                        <i class="fas fa-envelope fa-lg"></i>
-                    </a>
-                    <a href="https://wa.me/254759270210" target="_blank">
-                        <i class="fab fa-whatsapp fa-lg"></i>
-                    </a>
+                <div class="col-md-5 text-md-end">
+                    <div class="d-flex gap-2 justify-content-md-end justify-content-start">
+                        <a href="https://github.com/VINN5" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:vinnwambui2@gmail.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/254759270210" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -556,9 +476,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.addEventListener('scroll', () => {
-            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
     </script>
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>
