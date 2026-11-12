@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101C2C">
     <title>{% block title %}Vinn Wambui | Portfolio{% endblock %}</title>
 
     <!-- Favicon -->
@@ -14,11 +15,101 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* ============================================
+           MIDNIGHT INTELLIGENCE - DESIGN TOKENS
+           Change the palette here and nowhere else.
+           ============================================ */
+        :root {
+            /* Brand palette */
+            --midnight-navy: #101C2C;
+            --egyptian-blue: #245A9B;
+            --stone-blue:    #8BA9C5;
+            --soft-ivory:    #F1F0EA;
+            --scarlet-red:   #E64B4B;
+
+            /* Derived dark surfaces (tints/shades of Midnight Navy) */
+            --navy-deep:     #0B1521;
+            --surface:       #16263B;
+            --surface-hover: #1B3050;
+            --band:          rgba(139, 169, 197, 0.05);
+
+            /* Egyptian Blue interaction shades */
+            --egyptian-hover:  #2C6BB3;
+            --egyptian-active: #1D4C84;
+
+            /* Semantic roles - components should use these */
+            --bg:           var(--midnight-navy);
+            --text:         var(--soft-ivory);
+            --text-muted:   var(--stone-blue);
+            --brand:        var(--egyptian-blue);
+            --accent:       var(--scarlet-red);
+            --border:       rgba(139, 169, 197, 0.22);
+            --border-strong: rgba(139, 169, 197, 0.45);
+            --shadow-soft:  0 12px 32px rgba(4, 10, 20, 0.35);
+            --shadow-lift:  0 20px 44px rgba(4, 10, 20, 0.5);
+
+            color-scheme: dark;
+        }
+
+        /* Map the tokens onto Bootstrap's own variables */
+        :root[data-bs-theme="dark"] {
+            --bs-body-bg: var(--midnight-navy);
+            --bs-body-bg-rgb: 16, 28, 44;
+            --bs-body-color: var(--soft-ivory);
+            --bs-body-color-rgb: 241, 240, 234;
+            --bs-emphasis-color: var(--soft-ivory);
+            --bs-heading-color: var(--soft-ivory);
+            --bs-secondary-color: var(--stone-blue);
+            --bs-secondary-color-rgb: 139, 169, 197;
+            --bs-border-color: rgba(139, 169, 197, 0.22);
+            --bs-link-color: var(--stone-blue);
+            --bs-link-color-rgb: 139, 169, 197;
+            --bs-link-hover-color: var(--soft-ivory);
+            --bs-link-hover-color-rgb: 241, 240, 234;
+            --bs-primary: var(--egyptian-blue);
+            --bs-primary-rgb: 36, 90, 155;
+        }
+
+        ::selection {
+            background: var(--egyptian-blue);
+            color: var(--soft-ivory);
+        }
+
+        /* Accessible focus state for every interactive element */
+        :focus-visible {
+            outline: 2px solid var(--scarlet-red);
+            outline-offset: 3px;
+        }
+
+        .btn:focus-visible,
+        .navbar-toggler:focus-visible {
+            outline: 2px solid var(--scarlet-red);
+            outline-offset: 3px;
+            box-shadow: none;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-            color: #1e293b;
+            background-color: var(--bg);
+            background: linear-gradient(180deg, var(--midnight-navy) 0%, #0E1826 100%);
+            color: var(--text);
             overflow-x: hidden;
+        }
+
+        /* Shared overrides so Bootstrap helpers behave on the dark theme */
+        .bg-light {
+            background-color: var(--band) !important;
+        }
+
+        .card {
+            --bs-card-bg: var(--surface);
+            --bs-card-color: var(--text);
+            --bs-card-border-color: var(--border);
+        }
+
+        hr {
+            border-color: var(--border);
+            opacity: 1;
         }
 
         /* Page entrance animation */
@@ -44,26 +135,52 @@
         }
 
         .navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.92);
+            background-color: rgba(16, 28, 44, 0.92);
             backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 0 var(--border), 0 8px 24px rgba(4, 10, 20, 0.35);
         }
 
         .navbar-brand {
             font-weight: 700;
             letter-spacing: -0.5px;
-            color: #1e293b !important;
+            color: var(--soft-ivory) !important;
         }
 
         .nav-link {
+            position: relative;
             font-weight: 500;
-            color: #475569 !important;
+            color: var(--stone-blue) !important;
             transition: color 0.2s ease;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            color: #1e40af !important;
+            color: var(--soft-ivory) !important;
+        }
+
+        /* Scarlet active indicator */
+        .nav-link.active::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 2px;
+            width: 20px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--scarlet-red);
+            transform: translateX(-50%);
+        }
+
+        .navbar-toggler {
+            border-color: var(--border-strong);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F1F0EA' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
         /* Hero */
@@ -79,7 +196,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 45%);
+            background: radial-gradient(circle at top right, rgba(36, 90, 155, 0.22), transparent 50%);
             pointer-events: none;
         }
 
@@ -90,9 +207,9 @@
             transform: translateY(-50%);
             width: 560px;
             height: 560px;
-            border: 2px dotted #bdd9ff;
+            border: 2px dotted var(--stone-blue);
             border-radius: 50%;
-            opacity: 0.45;
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -102,12 +219,12 @@
             max-width: 100%;
             object-fit: cover;
             border-radius: 50%;
-            border: 10px solid white;
-            box-shadow: 0 30px 80px rgba(59, 130, 246, 0.18);
+            border: 10px solid var(--surface);
+            box-shadow: 0 0 0 1px var(--border-strong), 0 30px 70px rgba(4, 10, 20, 0.55);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            background: linear-gradient(135deg, var(--stone-blue), var(--soft-ivory));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -123,13 +240,21 @@
         .lead {
             font-size: 1.25rem;
             font-weight: 400;
-            color: #475569;
+            color: var(--stone-blue);
         }
 
         /* Buttons */
         .btn-primary {
-            background-color: #1e293b;
-            border: none;
+            --bs-btn-color: var(--soft-ivory);
+            --bs-btn-bg: var(--egyptian-blue);
+            --bs-btn-border-color: var(--egyptian-blue);
+            --bs-btn-hover-color: var(--soft-ivory);
+            --bs-btn-hover-bg: var(--egyptian-hover);
+            --bs-btn-hover-border-color: var(--egyptian-hover);
+            --bs-btn-active-color: var(--soft-ivory);
+            --bs-btn-active-bg: var(--egyptian-active);
+            --bs-btn-active-border-color: var(--egyptian-active);
+            --bs-btn-border-width: 0px;
             border-radius: 50px;
             padding: 14px 32px;
             font-weight: 600;
@@ -137,13 +262,18 @@
         }
 
         .btn-primary:hover {
-            background-color: #0f172a;
             transform: translateY(-2px);
         }
 
         .btn-outline-primary {
-            border-color: #3b82f6;
-            color: #3b82f6;
+            --bs-btn-color: var(--stone-blue);
+            --bs-btn-border-color: var(--stone-blue);
+            --bs-btn-hover-color: var(--midnight-navy);
+            --bs-btn-hover-bg: var(--stone-blue);
+            --bs-btn-hover-border-color: var(--stone-blue);
+            --bs-btn-active-color: var(--midnight-navy);
+            --bs-btn-active-bg: var(--soft-ivory);
+            --bs-btn-active-border-color: var(--soft-ivory);
             border-radius: 50px;
             padding: 14px 32px;
             font-weight: 600;
@@ -151,15 +281,25 @@
         }
 
         .btn-outline-primary:hover {
-            background-color: #3b82f6;
-            color: white;
             transform: translateY(-2px);
+        }
+
+        /* Secondary outline used on project cards (was btn-outline-dark) */
+        .btn-outline-dark {
+            --bs-btn-color: var(--soft-ivory);
+            --bs-btn-border-color: var(--border-strong);
+            --bs-btn-hover-color: var(--midnight-navy);
+            --bs-btn-hover-bg: var(--soft-ivory);
+            --bs-btn-hover-border-color: var(--soft-ivory);
+            --bs-btn-active-color: var(--midnight-navy);
+            --bs-btn-active-bg: var(--soft-ivory);
+            --bs-btn-active-border-color: var(--soft-ivory);
         }
 
         .btn-resume {
             background-color: transparent;
-            border: 2px solid #1e293b;
-            color: #1e293b;
+            border: 2px solid var(--border-strong);
+            color: var(--soft-ivory);
             border-radius: 50px;
             padding: 14px 32px;
             font-weight: 600;
@@ -167,33 +307,61 @@
         }
 
         .btn-resume:hover {
-            background-color: #1e293b;
-            color: white;
+            background-color: var(--soft-ivory);
+            border-color: var(--soft-ivory);
+            color: var(--midnight-navy);
+            transform: translateY(-2px);
+        }
+
+        /* Scarlet CTA - reserve for ONE key action per page */
+        .btn-accent {
+            --bs-btn-color: var(--midnight-navy);
+            --bs-btn-bg: var(--scarlet-red);
+            --bs-btn-border-color: var(--scarlet-red);
+            --bs-btn-hover-color: var(--midnight-navy);
+            --bs-btn-hover-bg: #EE6464;
+            --bs-btn-hover-border-color: #EE6464;
+            --bs-btn-active-color: var(--midnight-navy);
+            --bs-btn-active-bg: #D13F3F;
+            --bs-btn-active-border-color: #D13F3F;
+            --bs-btn-border-width: 0px;
+            border-radius: 50px;
+            padding: 14px 32px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .btn-accent:hover {
             transform: translateY(-2px);
         }
 
         .location {
-            color: #64748b;
+            color: var(--stone-blue);
             font-weight: 500;
             font-size: 1.1rem;
         }
 
         /* Footer */
         footer {
-            background: #0f172a;
-            color: #94a3b8;
+            background: var(--navy-deep);
+            border-top: 1px solid var(--border);
+            color: var(--stone-blue);
             padding: 3rem 0 2rem;
             margin-top: 5rem;
         }
 
+        footer .footer-title {
+            color: var(--soft-ivory);
+        }
+
         footer a {
-            color: #cbd5e1;
+            color: var(--stone-blue);
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
         footer a:hover {
-            color: #ffffff;
+            color: var(--soft-ivory);
         }
 
         /* ============================================
@@ -202,8 +370,8 @@
 
         @media (max-width: 991.98px) {
             .navbar {
-                background-color: rgba(255, 255, 255, 0.98) !important;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+                background-color: rgba(16, 28, 44, 0.98) !important;
+                box-shadow: 0 1px 0 var(--border), 0 4px 14px rgba(4, 10, 20, 0.4);
             }
 
             .navbar-brand {
@@ -220,6 +388,10 @@
                 font-size: 1.05rem;
             }
 
+            .navbar-nav .nav-link.active::after {
+                bottom: 6px;
+            }
+
             .navbar .btn-primary {
                 width: 100%;
                 margin-top: 1rem;
@@ -233,7 +405,7 @@
             .profile-img {
                 width: 320px;
                 height: 320px;
-                border: 8px solid white;
+                border: 8px solid var(--surface);
             }
         }
 
@@ -247,13 +419,13 @@
                 width: 280px;
                 height: 280px;
                 right: -40px;
-                opacity: 0.3;
+                opacity: 0.22;
             }
 
             .profile-img {
                 width: 260px;
                 height: 260px;
-                border: 6px solid white;
+                border: 6px solid var(--surface);
                 margin-bottom: 2rem;
             }
 
@@ -272,7 +444,8 @@
 
             .btn-primary,
             .btn-outline-primary,
-            .btn-resume {
+            .btn-resume,
+            .btn-accent {
                 padding: 12px 24px;
                 font-size: 0.95rem;
             }
@@ -286,7 +459,7 @@
             .profile-img {
                 width: 200px;
                 height: 200px;
-                border: 5px solid white;
+                border: 5px solid var(--surface);
             }
 
             h1.display-3 {
@@ -305,7 +478,8 @@
 
             .btn-primary,
             .btn-outline-primary,
-            .btn-resume {
+            .btn-resume,
+            .btn-accent {
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
@@ -361,7 +535,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <p class="mb-1 fw-medium text-white">Let's build something meaningful.</p>
+                    <p class="mb-1 fw-medium footer-title">Let's build something meaningful.</p>
                     <p class="mb-0 small">© 2026 Vincent Wambugu. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">

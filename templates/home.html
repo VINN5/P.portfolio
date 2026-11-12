@@ -75,15 +75,17 @@
         border-radius: 16px;
         padding: 2rem 1.75rem;
         height: 100%;
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.06);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
     }
 
     .capability-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        background: var(--surface-hover);
+        border-color: var(--stone-blue);
+        box-shadow: var(--shadow-lift);
     }
 
     .capability-icon {
@@ -95,11 +97,12 @@
         font-size: 1.15rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
+        color: var(--soft-ivory);
     }
 
     .capability-card p {
         font-size: 0.95rem;
-        color: #6c757d;
+        color: var(--stone-blue);
         margin-bottom: 0;
     }
 
@@ -110,7 +113,7 @@
         letter-spacing: 0.05em;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: #6c757d;
+        color: var(--stone-blue);
     }
 
     .tech-badge {
@@ -118,17 +121,24 @@
         padding: 0.4rem 0.9rem;
         margin: 0 0.4rem 0.6rem 0;
         border-radius: 999px;
-        background: #f1f3f5;
+        background: rgba(36, 90, 155, 0.22);
+        border: 1px solid var(--border);
         font-size: 0.85rem;
         font-weight: 500;
-        color: #343a40;
+        color: var(--soft-ivory);
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .tech-badge:hover {
+        background: rgba(36, 90, 155, 0.4);
+        border-color: var(--stone-blue);
     }
 
     /* Timeline */
     .timeline {
         position: relative;
         padding-left: 2rem;
-        border-left: 2px solid rgba(0,0,0,0.08);
+        border-left: 2px solid var(--border-strong);
     }
 
     .timeline-item {
@@ -148,17 +158,25 @@
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: var(--bs-primary, #6366f1);
+        background: var(--egyptian-blue);
+        border: 2px solid var(--stone-blue);
+    }
+
+    /* Current focus = active indicator */
+    .timeline-item:last-child::before {
+        background: var(--scarlet-red);
+        border-color: var(--scarlet-red);
     }
 
     .timeline-item h4 {
         font-weight: 700;
         margin-bottom: 0.25rem;
+        color: var(--soft-ivory);
     }
 
     .timeline-item .timeline-meta {
         font-size: 0.85rem;
-        color: #6c757d;
+        color: var(--stone-blue);
         margin-bottom: 0.5rem;
     }
 </style>
@@ -182,7 +200,7 @@
                 </p>
 
                 <div class="d-flex flex-wrap justify-content-lg-start justify-content-center gap-3">
-                    <a href="/projects" class="btn btn-primary btn-lg">View Projects</a>
+                    <a href="/projects" class="btn btn-accent btn-lg">View Projects</a>
                     <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
                     <a href="{{ url_for('static', filename='files/resume.pdf') }}"
                        class="btn btn-resume btn-lg" download>
