@@ -79,29 +79,29 @@
         align-items: center;
     }
 
+    /* Compact circular profile photo: identity support, not the hero focus */
     .hero-portrait-wrap {
         position: relative;
         display: inline-block;
-        /* Soft outer glow ring */
-        padding: 6px;
-        border-radius: 28px;
+        padding: 4px;
+        border-radius: 50%;
         background: linear-gradient(
             145deg,
-            rgba(139, 169, 197, 0.35),
-            rgba(36, 90, 155, 0.15) 50%,
-            rgba(139, 169, 197, 0.08)
+            rgba(139, 169, 197, 0.45),
+            rgba(36, 90, 155, 0.18) 55%,
+            rgba(139, 169, 197, 0.10)
         );
-        box-shadow: 0 28px 56px rgba(4, 10, 20, 0.45);
+        box-shadow: 0 12px 30px rgba(4, 10, 20, 0.30);
     }
 
     .hero-portrait {
         display: block;
-        width: min(340px, 78vw);
-        aspect-ratio: 4 / 5;
+        width: 148px;
+        height: 148px;
+        aspect-ratio: 1 / 1;
         object-fit: cover;
-        /* Bias crop toward face (upper-middle of typical outdoor portraits) */
-        object-position: center 22%;
-        border-radius: 22px;
+        object-position: center 30%;
+        border-radius: 50%;
         border: 3px solid var(--surface);
         background: var(--navy-deep);
     }
@@ -298,16 +298,8 @@
     @media (max-width: 991.98px) {
         .hero {
             min-height: auto;
-            padding-top: 6rem;
+            padding-top: 5rem;
             padding-bottom: 2.5rem;
-        }
-
-        .hero-portrait-wrap {
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-portrait {
-            width: min(260px, 62vw);
         }
     }
 
@@ -318,6 +310,8 @@
 
         .hero-lead {
             font-size: 1.05rem;
+            margin-left: auto;
+            margin-right: auto;
             margin-bottom: 1.75rem;
         }
 
@@ -336,27 +330,15 @@
         }
 
         .hero-portrait {
-            width: min(220px, 58vw);
-        }
-
-        .hero-portrait-wrap {
-            border-radius: 22px;
-            padding: 5px;
-        }
-
-        .hero-portrait {
-            border-radius: 18px;
+            width: 116px;
+            height: 116px;
         }
     }
 
     @media (max-width: 575.98px) {
         .hero {
-            padding-top: 5.25rem;
+            padding-top: 3.5rem;
             padding-bottom: 2rem;
-        }
-
-        .hero-portrait {
-            width: min(200px, 55vw);
         }
 
         .hero h1 {
@@ -366,13 +348,14 @@
         .hero-lead {
             font-size: 1rem;
         }
+
+        .hero-identity {
+            font-size: 0.72rem;
+            justify-content: center;
+        }
     }
 
     @media (max-width: 400px) {
-        .hero-portrait {
-            width: 170px;
-        }
-
         .hero h1 {
             font-size: 1.5rem;
         }
@@ -384,8 +367,20 @@
 <!-- Hero -->
 <section class="hero">
     <div class="container">
-        <div class="row align-items-center gy-5">
-            <div class="col-lg-6 order-lg-1 order-2 text-lg-start text-center">
+        <div class="row align-items-center justify-content-center gy-4">
+            <!-- Small profile image: shown above the introduction on mobile,
+                 and beside it on larger screens. -->
+            <div class="col-12 col-lg-3 text-center">
+                <div class="hero-portrait-wrap">
+                    <img src="{{ url_for('static', filename='images/me.jpg') }}"
+                         alt="Portrait of Vinn Wambui"
+                         class="hero-portrait"
+                         width="148"
+                         height="148">
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-8 text-center text-lg-start">
                 <div class="hero-identity">
                     <span class="dot"></span>
                     Software Engineer · Nairobi, Kenya
@@ -395,27 +390,17 @@
                     Building software that<br class="d-none d-md-inline">
                     solves <span class="accent">real-world problems</span>.
                 </h1>
-                <p class="hero-lead">
+                <p class="hero-lead mx-auto mx-lg-0">
                     I engineer intelligent applications, reliable backend systems,
                     and scalable platforms that turn complex challenges into practical solutions.
                 </p>
-                <div class="hero-actions justify-content-lg-start justify-content-center">
+                <div class="hero-actions justify-content-center justify-content-lg-start">
                     <a href="/projects" class="btn btn-accent">View Projects</a>
                     <a href="/contact" class="btn btn-outline-primary">Contact Me</a>
                     <a href="{{ url_for('static', filename='files/resume.pdf') }}"
                        class="btn btn-resume" download>
                         <i class="fas fa-download me-2"></i>Resume
                     </a>
-                </div>
-            </div>
-
-            <div class="col-lg-6 order-lg-2 order-1 text-center">
-                <div class="hero-portrait-wrap">
-                    <img src="{{ url_for('static', filename='images/me.jpg') }}"
-                         alt="Vinn Wambui"
-                         class="hero-portrait"
-                         width="380"
-                         height="380">
                 </div>
             </div>
         </div>
