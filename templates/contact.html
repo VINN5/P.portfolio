@@ -30,6 +30,7 @@
         color: inherit;
     }
 
+    /* One consistent icon treatment for all four cards (palette only) */
     .contact-icon {
         width: 52px;
         height: 52px;
@@ -39,28 +40,14 @@
         justify-content: center;
         font-size: 1.35rem;
         margin-bottom: 1.15rem;
-        background: rgba(36, 90, 155, 0.18);
-        color: var(--stone-blue);
-    }
-
-    .contact-icon.icon-email {
         background: rgba(36, 90, 155, 0.22);
-        color: #6BA3D8;
+        color: var(--stone-blue);
+        transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    .contact-icon.icon-github {
-        background: rgba(139, 169, 197, 0.12);
+    .contact-card:hover .contact-icon {
+        background: var(--egyptian-blue);
         color: var(--soft-ivory);
-    }
-
-    .contact-icon.icon-linkedin {
-        background: rgba(10, 102, 194, 0.2);
-        color: #5B9BD5;
-    }
-
-    .contact-icon.icon-whatsapp {
-        background: rgba(22, 163, 74, 0.18);
-        color: #4ADE80;
     }
 
     .contact-card h5 {
