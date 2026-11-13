@@ -4,13 +4,14 @@
 {% block extra_css %}
 <style>
     /* ---------- HERO ---------- */
+    /* Top padding clears the fixed navbar (~76px) with real breathing room */
     .hero {
         min-height: 100vh;
         display: flex;
         align-items: center;
         position: relative;
-        padding-top: 5.5rem;
-        padding-bottom: 3rem;
+        padding-top: 8rem;
+        padding-bottom: 5rem;
         overflow: hidden;
     }
 
@@ -22,16 +23,30 @@
         pointer-events: none;
     }
 
+    /* Byline: name is the first thing read, role and place sit quietly under it */
+    .hero-byline {
+        margin-bottom: 1.75rem;
+    }
+
+    .hero-name {
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--soft-ivory);
+        margin-bottom: 0.4rem;
+    }
+
     .hero-identity {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: 600;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--stone-blue);
-        margin-bottom: 1.25rem;
+        margin: 0;
     }
 
     .hero-identity .dot {
@@ -42,20 +57,13 @@
         flex-shrink: 0;
     }
 
-    .hero-name {
-        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-        font-weight: 600;
-        color: var(--soft-ivory);
-        letter-spacing: 0.02em;
-        margin-bottom: 0.75rem;
-    }
-
+    /* Headline: the dominant element on the page */
     .hero h1 {
         font-weight: 800;
-        line-height: 1.15;
-        letter-spacing: -0.8px;
-        font-size: clamp(1.85rem, 4.2vw, 3.1rem);
-        margin-bottom: 1.35rem;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-size: clamp(2.35rem, 5.6vw + 0.5rem, 4.1rem);
+        margin-bottom: 1.5rem;
         color: var(--soft-ivory);
     }
 
@@ -63,57 +71,76 @@
         color: var(--stone-blue);
     }
 
+    /* Supporting text: clearly secondary */
     .hero-lead {
-        font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+        font-size: clamp(0.95rem, 1.2vw, 1.05rem);
         font-weight: 400;
         color: var(--stone-blue);
-        max-width: 32rem;
-        margin-bottom: 2rem;
+        max-width: 30rem;
+        margin-bottom: 2.25rem;
         line-height: 1.65;
     }
 
+    /* Actions: one primary, one secondary, one quiet text link */
     .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.85rem;
+        gap: 0.75rem 0.85rem;
         align-items: center;
     }
 
-    /* Compact circular profile photo: identity support, not the hero focus */
+    /* Compact, confident buttons (scoped to this page's content) */
+    main .btn {
+        padding: 0.62rem 1.35rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1.4;
+        width: auto;
+    }
+
+    /* Resume becomes a tertiary text link so it stops competing with the CTAs */
+    .hero-actions .btn-resume {
+        border-color: transparent;
+        background: transparent;
+        color: var(--stone-blue);
+        padding: 0.62rem 0.5rem;
+        transform: none;
+    }
+
+    .hero-actions .btn-resume:hover {
+        background: transparent;
+        border-color: transparent;
+        color: var(--soft-ivory);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        transform: none;
+    }
+
+    /* Profile photo: larger and clearly visible, with a quiet ring */
     .hero-portrait-wrap {
         position: relative;
         display: inline-block;
-        padding: 4px;
+        padding: 5px;
         border-radius: 50%;
         background: linear-gradient(
             145deg,
-            rgba(139, 169, 197, 0.45),
-            rgba(36, 90, 155, 0.18) 55%,
-            rgba(139, 169, 197, 0.10)
+            rgba(139, 169, 197, 0.5),
+            rgba(36, 90, 155, 0.2) 55%,
+            rgba(139, 169, 197, 0.12)
         );
-        box-shadow: 0 12px 30px rgba(4, 10, 20, 0.30);
+        box-shadow: 0 18px 44px rgba(4, 10, 20, 0.4);
     }
 
     .hero-portrait {
         display: block;
-        width: 148px;
-        height: 148px;
+        width: 168px;
+        height: 168px;
         aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: center 30%;
         border-radius: 50%;
-        border: 3px solid var(--surface);
+        border: 4px solid var(--surface);
         background: var(--navy-deep);
-    }
-
-    .hero-location {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        color: var(--stone-blue);
-        font-weight: 500;
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
     }
 
     /* ---------- CAPABILITY CARDS ---------- */
@@ -163,7 +190,7 @@
 
     /* ---------- ABOUT ---------- */
     .about-text {
-        font-size: 1.05rem;
+        font-size: 1rem;
         color: var(--stone-blue);
         line-height: 1.75;
         max-width: 40rem;
@@ -295,69 +322,53 @@
     }
 
     /* ---------- RESPONSIVE ---------- */
+    @media (min-width: 768px) {
+        .hero-portrait {
+            width: 190px;
+            height: 190px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .hero-portrait {
+            width: 230px;
+            height: 230px;
+        }
+    }
+
     @media (max-width: 991.98px) {
         .hero {
             min-height: auto;
-            padding-top: 5rem;
-            padding-bottom: 2.5rem;
+            padding-top: 7.5rem;
+            padding-bottom: 4rem;
         }
     }
 
     @media (max-width: 767.98px) {
-        .hero h1 {
-            font-size: 1.85rem;
-        }
-
         .hero-lead {
-            font-size: 1.05rem;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 1.75rem;
-        }
-
-        .hero-actions {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .hero-actions .btn {
-            width: 100%;
-            text-align: center;
+            margin-bottom: 2rem;
         }
 
         .section-title {
             font-size: 1.75rem !important;
         }
-
-        .hero-portrait {
-            width: 116px;
-            height: 116px;
-        }
     }
 
     @media (max-width: 575.98px) {
         .hero {
-            padding-top: 3.5rem;
-            padding-bottom: 2rem;
+            padding-top: 7rem;
+            padding-bottom: 3.5rem;
         }
 
-        .hero h1 {
-            font-size: 1.65rem;
-        }
-
-        .hero-lead {
-            font-size: 1rem;
+        .hero-byline {
+            margin-bottom: 1.5rem;
         }
 
         .hero-identity {
             font-size: 0.72rem;
             justify-content: center;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .hero h1 {
-            font-size: 1.5rem;
         }
     }
 </style>
@@ -367,25 +378,26 @@
 <!-- Hero -->
 <section class="hero">
     <div class="container">
-        <div class="row align-items-center justify-content-center gy-4">
-            <!-- Small profile image: shown above the introduction on mobile,
-                 and beside it on larger screens. -->
-            <div class="col-12 col-lg-3 text-center">
+        <div class="row align-items-center justify-content-center gy-5">
+            <!-- Profile image: above the introduction on mobile, beside it on larger screens. -->
+            <div class="col-12 col-lg-4 text-center">
                 <div class="hero-portrait-wrap">
                     <img src="{{ url_for('static', filename='images/me.jpg') }}"
                          alt="Portrait of Vinn Wambui"
                          class="hero-portrait"
-                         width="148"
-                         height="148">
+                         width="230"
+                         height="230">
                 </div>
             </div>
 
             <div class="col-12 col-lg-8 text-center text-lg-start">
-                <div class="hero-identity">
-                    <span class="dot"></span>
-                    Software Engineer · Nairobi, Kenya
+                <div class="hero-byline">
+                    <p class="hero-name">VINN WAMBUI</p>
+                    <div class="hero-identity">
+                        <span class="dot"></span>
+                        Software Engineer · Nairobi, Kenya
+                    </div>
                 </div>
-                <p class="hero-name">VINN WAMBUI</p>
                 <h1>
                     Building software that<br class="d-none d-md-inline">
                     solves <span class="accent">real-world problems</span>.
@@ -470,7 +482,7 @@
                     <p>
                         I enjoy turning complex business challenges into practical, scalable solutions by combining
                         thoughtful system architecture with clean, maintainable code. I work across the entire
-                        software lifecycle — from requirements and system design to backend development, APIs,
+                        software lifecycle from requirements and system design to backend development, APIs,
                         databases, frontend interfaces, and deployment.
                     </p>
                     <p>
@@ -592,7 +604,7 @@
             </div>
             <div class="timeline-item">
                 <h4>Astryx Dynamics</h4>
-                <p class="timeline-meta">IT Support Specialist &amp; Software Developer · Nov 2025 – May 2026</p>
+                <p class="timeline-meta">IT Support Specialist &amp; Software Developer · Nov 2025 – Sept 2026</p>
             </div>
             <div class="timeline-item">
                 <h4>Major Projects</h4>

@@ -51,6 +51,11 @@
             --space-section: clamp(4rem, 8vw, 6.5rem);
             --content-max: 1120px;
 
+            /* Button sizing (one place to tune every button) */
+            --btn-pad-y: 0.62rem;
+            --btn-pad-x: 1.35rem;
+            --btn-font-size: 0.9rem;
+
             color-scheme: dark;
         }
 
@@ -108,7 +113,6 @@
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
             background-image: linear-gradient(180deg, var(--midnight-navy) 0%, #0E1826 100%);
-            background-attachment: fixed;
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
@@ -212,6 +216,15 @@
         }
 
         /* ---------- BUTTONS ---------- */
+        .btn-primary,
+        .btn-outline-primary,
+        .btn-resume,
+        .btn-accent {
+            padding: var(--btn-pad-y) var(--btn-pad-x);
+            font-size: var(--btn-font-size);
+            border-radius: var(--radius-pill);
+        }
+
         .btn-primary {
             --bs-btn-color: var(--soft-ivory);
             --bs-btn-bg: var(--egyptian-blue);
@@ -223,10 +236,7 @@
             --bs-btn-active-bg: var(--egyptian-active);
             --bs-btn-active-border-color: var(--egyptian-active);
             --bs-btn-border-width: 0;
-            border-radius: var(--radius-pill);
-            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            font-size: 0.95rem;
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
@@ -243,10 +253,7 @@
             --bs-btn-active-color: var(--midnight-navy);
             --bs-btn-active-bg: var(--soft-ivory);
             --bs-btn-active-border-color: var(--soft-ivory);
-            border-radius: var(--radius-pill);
-            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            font-size: 0.95rem;
             transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
@@ -270,10 +277,7 @@
             background: transparent;
             border: 1.5px solid var(--border-strong);
             color: var(--soft-ivory);
-            border-radius: var(--radius-pill);
-            padding: 0.8rem 1.75rem;
             font-weight: 600;
-            font-size: 0.95rem;
             transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
@@ -295,10 +299,7 @@
             --bs-btn-active-bg: #D13F3F;
             --bs-btn-active-border-color: #D13F3F;
             --bs-btn-border-width: 0;
-            border-radius: var(--radius-pill);
-            padding: 0.85rem 1.9rem;
             font-weight: 700;
-            font-size: 0.95rem;
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
@@ -313,7 +314,7 @@
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--egyptian-blue);
+            color: var(--stone-blue);
             margin-bottom: 0.75rem;
         }
 
@@ -398,19 +399,8 @@
             }
 
             .navbar .btn-primary {
-                width: 100%;
                 margin-top: 0.75rem;
                 margin-bottom: 0.5rem;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .btn-primary,
-            .btn-outline-primary,
-            .btn-resume,
-            .btn-accent {
-                padding: 0.7rem 1.35rem;
-                font-size: 0.9rem;
             }
         }
     </style>
