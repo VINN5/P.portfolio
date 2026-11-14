@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Home | Vinn Wambui{% endblock %}
+{% block title %}Home | Vinn{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -231,9 +231,9 @@
     }
 
     /* ---------- FEATURED PROJECT CARDS ---------- */
-    .project-preview-card {
+    .project-feature-card {
         border-radius: var(--radius-md);
-        padding: 1.75rem 1.5rem;
+        padding: clamp(1.6rem, 3vw, 2.1rem);
         height: 100%;
         background: var(--surface);
         border: 1px solid var(--border);
@@ -243,25 +243,80 @@
         flex-direction: column;
     }
 
-    .project-preview-card:hover {
+    .project-feature-card:hover {
         transform: translateY(-5px);
         border-color: var(--border-strong);
         box-shadow: var(--shadow-lift);
     }
 
-    .project-preview-card h3 {
-        font-size: 1.15rem;
-        font-weight: 700;
-        margin-bottom: 0.6rem;
+    .project-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--stone-blue);
+        margin-bottom: 0.7rem;
+    }
+
+    .project-feature-card h3 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.75rem;
         color: var(--soft-ivory);
     }
 
-    .project-preview-card p {
+    .project-summary {
         font-size: 0.95rem;
+        line-height: 1.65;
         color: var(--stone-blue);
-        margin-bottom: 0;
+        margin-bottom: 1.35rem;
+    }
+
+    .project-points {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.5rem;
+        display: grid;
+        gap: 0.7rem;
+    }
+
+    .project-points li {
+        position: relative;
+        padding-left: 1.4rem;
+        font-size: 0.88rem;
         line-height: 1.55;
-        flex-grow: 1;
+        color: var(--stone-blue);
+    }
+
+    .project-points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--stone-blue);
+    }
+
+    .project-points strong {
+        color: var(--soft-ivory);
+        font-weight: 600;
+    }
+
+    .project-stack {
+        margin-bottom: 1.4rem;
+    }
+
+    .project-links {
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
     }
 
     /* ---------- TIMELINE ---------- */
@@ -559,23 +614,76 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="project-preview-card">
-                    <h3>ORRBIT</h3>
-                    <p>A RAG-powered knowledge platform for intelligent document search and retrieval.</p>
-                </div>
+            <!-- ReliefIQ -->
+            <div class="col-lg-6">
+                <article class="project-feature-card">
+                    <span class="project-kicker"><i class="fas fa-shield-halved"></i> AI · NGO Governance</span>
+                    <h3>ReliefIQ</h3>
+                    <p class="project-summary">
+                        An AI knowledge and governance assistant for NGO staff. It answers questions only from the
+                        organisation's own policy documents, cites every claim, and says so when it can't answer
+                        instead of guessing.
+                    </p>
+                    <ul class="project-points">
+                        <li><strong>Grounded, cited answers.</strong> Hybrid retrieval over a private document library using pgvector, with High / Medium / Low confidence scoring.</li>
+                        <li><strong>Citation enforcement.</strong> A response without verifiable citations is rejected server-side, not just discouraged in the prompt.</li>
+                        <li><strong>Role-based access.</strong> Field staff, manager and admin tiers enforced at the API, with document-level restrictions and version history.</li>
+                        <li><strong>Gap and conflict detection.</strong> Compares donor requirements against internal policies and flags what is covered, partial, missing or contradictory.</li>
+                        <li><strong>Spreadsheet analysis.</strong> Excel and CSV files are ingested as structured tables, with exact, code-computed comparison between versions.</li>
+                        <li><strong>Built to be resilient and auditable.</strong> Gemini → Groq → Anthropic fallback chain, prompt-injection defence at ingestion, and a full admin audit log.</li>
+                    </ul>
+                    <div class="project-stack">
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">pgvector</span>
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">TypeScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Supabase</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/VINN5/ReliefIQ" target="_blank" rel="noopener"
+                           class="btn btn-outline-primary">
+                            <i class="fab fa-github me-2"></i>View on GitHub
+                        </a>
+                    </div>
+                </article>
             </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="project-preview-card">
-                    <h3>AgroWeather</h3>
-                    <p>A bilingual AI-driven farming dashboard serving smallholder farmers across Kenya.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="project-preview-card">
-                    <h3>MatSched</h3>
-                    <p>A fleet scheduling SaaS platform with integrated M-Pesa payments.</p>
-                </div>
+
+            <!-- PulseOps -->
+            <div class="col-lg-6">
+                <article class="project-feature-card">
+                    <span class="project-kicker"><i class="fas fa-wave-square"></i> Observability · Incident Analysis</span>
+                    <h3>PulseOps</h3>
+                    <p class="project-summary">
+                        An evidence-first incident investigator for OpenTelemetry services. Given a captured window
+                        of metrics, change events and traces around a symptom, it works out what changed, where, and
+                        what most plausibly caused it, and shows its evidence.
+                    </p>
+                    <ul class="project-points">
+                        <li><strong>Deterministic core first.</strong> A pipeline of ingest, change-point detection, event alignment, dependency graph and scoring produces ranked hypotheses and a timeline before any model is involved.</li>
+                        <li><strong>Change-point detection.</strong> A CUSUM detector over a fixed baseline emits metric-change evidence for each affected signal.</li>
+                        <li><strong>Dependency graph from real traces.</strong> The service graph is built only from spans that were actually observed, never assumed.</li>
+                        <li><strong>Decoy-aware ranking.</strong> Deploys and config changes are aligned to the symptom and scored with a visible feature breakdown, tested on synthetic scenarios such as connection-pool exhaustion and a decoy deploy.</li>
+                        <li><strong>Optional model step.</strong> Hypotheses can be drafted by Anthropic or any OpenAI-compatible provider (Groq, Gemini, OpenRouter), with citation checking, redaction, bounded retries and a deterministic fallback.</li>
+                        <li><strong>Documented decisions.</strong> Architecture choices are recorded as decision records alongside the code.</li>
+                    </ul>
+                    <div class="project-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">OpenTelemetry</span>
+                        <span class="tech-badge">CUSUM</span>
+                        <span class="tech-badge">Dependency Graphs</span>
+                        <span class="tech-badge">Anthropic</span>
+                        <span class="tech-badge">Groq</span>
+                        <span class="tech-badge">Gemini</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/VINN5/PulseOps" target="_blank" rel="noopener"
+                           class="btn btn-outline-primary">
+                            <i class="fab fa-github me-2"></i>View on GitHub
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
 
@@ -608,7 +716,7 @@
             </div>
             <div class="timeline-item">
                 <h4>Major Projects</h4>
-                <p class="timeline-meta">ORRBIT · AgroWeather · MatSched · StockFlow · Summit Wheels · SwiftMall</p>
+                <p class="timeline-meta">ReliefIQ · PulseOps · AgroWeather · StockFlow · Summit Wheels · SwiftMall</p>
             </div>
             <div class="timeline-item current">
                 <h4>Current Focus</h4>
