@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101C2C">
+    <meta name="theme-color" content="#03203D">
     <meta name="description" content="Vincent Wambugu (VINN) — Software Engineer in Nairobi building AI-powered applications, enterprise systems, and scalable platforms.">
     <title>{% block title %}Vinn Wambui | Software Engineer{% endblock %}</title>
 
@@ -17,31 +17,39 @@
     <style>
         /* ============================================
            MIDNIGHT INTELLIGENCE — DESIGN SYSTEM
+           Palette: Egyptian Blue #03203D, Stone Blue #639CC5,
+                    Soft Ivory #F1F0EA, Scarlet Red #EB2F33
            ============================================ */
         :root {
-            --midnight-navy: #101C2C;
-            --egyptian-blue: #245A9B;
-            --stone-blue:    #8BA9C5;
+            /* Brand palette */
+            --egyptian-blue: #03203D;
+            --stone-blue:    #639CC5;
             --soft-ivory:    #F1F0EA;
-            --scarlet-red:   #E64B4B;
+            --scarlet-red:   #EB2F33;
 
-            --navy-deep:     #0B1521;
-            --surface:       #16263B;
-            --surface-hover: #1B3050;
-            --band:          rgba(139, 169, 197, 0.06);
+            /* Derived dark surfaces (shades/tints of Egyptian Blue) */
+            --navy-deep:     #021829;
+            --surface:       #082A49;
+            --surface-hover: #0A3050;
+            --band:          rgba(99, 156, 197, 0.06);
 
-            --egyptian-hover:  #2C6BB3;
-            --egyptian-active: #1D4C84;
+            /* Interaction shades */
+            --stone-hover:    #7AAFD4;
+            --stone-active:   #5A93BC;
+            --scarlet-hover:  #F05A5D;
+            --scarlet-active: #D32529;
+            --on-accent:      #010E1A;   /* text on scarlet: keeps contrast above 4.5:1 */
 
-            --bg:            var(--midnight-navy);
+            /* Semantic roles — components should use these */
+            --bg:            var(--egyptian-blue);
             --text:          var(--soft-ivory);
             --text-muted:    var(--stone-blue);
-            --brand:         var(--egyptian-blue);
+            --brand:         var(--stone-blue);
             --accent:        var(--scarlet-red);
-            --border:        rgba(139, 169, 197, 0.18);
-            --border-strong: rgba(139, 169, 197, 0.38);
-            --shadow-soft:   0 8px 28px rgba(4, 10, 20, 0.32);
-            --shadow-lift:   0 18px 40px rgba(4, 10, 20, 0.48);
+            --border:        rgba(99, 156, 197, 0.20);
+            --border-strong: rgba(99, 156, 197, 0.42);
+            --shadow-soft:   0 8px 28px rgba(0, 8, 18, 0.40);
+            --shadow-lift:   0 18px 40px rgba(0, 8, 18, 0.55);
 
             --radius-sm: 10px;
             --radius-md: 16px;
@@ -60,21 +68,21 @@
         }
 
         :root[data-bs-theme="dark"] {
-            --bs-body-bg: var(--midnight-navy);
-            --bs-body-bg-rgb: 16, 28, 44;
+            --bs-body-bg: var(--egyptian-blue);
+            --bs-body-bg-rgb: 3, 32, 61;
             --bs-body-color: var(--soft-ivory);
             --bs-body-color-rgb: 241, 240, 234;
             --bs-emphasis-color: var(--soft-ivory);
             --bs-heading-color: var(--soft-ivory);
             --bs-secondary-color: var(--stone-blue);
-            --bs-secondary-color-rgb: 139, 169, 197;
+            --bs-secondary-color-rgb: 99, 156, 197;
             --bs-border-color: var(--border);
             --bs-link-color: var(--stone-blue);
-            --bs-link-color-rgb: 139, 169, 197;
+            --bs-link-color-rgb: 99, 156, 197;
             --bs-link-hover-color: var(--soft-ivory);
             --bs-link-hover-color-rgb: 241, 240, 234;
-            --bs-primary: var(--egyptian-blue);
-            --bs-primary-rgb: 36, 90, 155;
+            --bs-primary: var(--stone-blue);
+            --bs-primary-rgb: 99, 156, 197;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
@@ -93,8 +101,8 @@
         }
 
         ::selection {
-            background: var(--egyptian-blue);
-            color: var(--soft-ivory);
+            background: var(--stone-blue);
+            color: var(--egyptian-blue);
         }
 
         :focus-visible {
@@ -112,7 +120,7 @@
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
-            background-image: linear-gradient(180deg, var(--midnight-navy) 0%, #0E1826 100%);
+            background-image: linear-gradient(180deg, var(--egyptian-blue) 0%, #021A32 100%);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
@@ -156,10 +164,10 @@
         }
 
         .navbar.scrolled {
-            background-color: rgba(11, 21, 33, 0.92);
+            background-color: rgba(2, 24, 41, 0.92);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 1px 0 var(--border), 0 6px 20px rgba(4, 10, 20, 0.35);
+            box-shadow: 0 1px 0 var(--border), 0 6px 20px rgba(0, 8, 18, 0.4);
             padding-top: 0.7rem;
             padding-bottom: 0.7rem;
         }
@@ -225,16 +233,17 @@
             border-radius: var(--radius-pill);
         }
 
+        /* Primary: Stone Blue fill, dark text */
         .btn-primary {
-            --bs-btn-color: var(--soft-ivory);
-            --bs-btn-bg: var(--egyptian-blue);
-            --bs-btn-border-color: var(--egyptian-blue);
-            --bs-btn-hover-color: var(--soft-ivory);
-            --bs-btn-hover-bg: var(--egyptian-hover);
-            --bs-btn-hover-border-color: var(--egyptian-hover);
-            --bs-btn-active-color: var(--soft-ivory);
-            --bs-btn-active-bg: var(--egyptian-active);
-            --bs-btn-active-border-color: var(--egyptian-active);
+            --bs-btn-color: var(--egyptian-blue);
+            --bs-btn-bg: var(--stone-blue);
+            --bs-btn-border-color: var(--stone-blue);
+            --bs-btn-hover-color: var(--egyptian-blue);
+            --bs-btn-hover-bg: var(--stone-hover);
+            --bs-btn-hover-border-color: var(--stone-hover);
+            --bs-btn-active-color: var(--egyptian-blue);
+            --bs-btn-active-bg: var(--stone-active);
+            --bs-btn-active-border-color: var(--stone-active);
             --bs-btn-border-width: 0;
             font-weight: 600;
             transition: transform 0.2s ease, background-color 0.2s ease;
@@ -247,10 +256,10 @@
         .btn-outline-primary {
             --bs-btn-color: var(--stone-blue);
             --bs-btn-border-color: var(--border-strong);
-            --bs-btn-hover-color: var(--midnight-navy);
+            --bs-btn-hover-color: var(--egyptian-blue);
             --bs-btn-hover-bg: var(--soft-ivory);
             --bs-btn-hover-border-color: var(--soft-ivory);
-            --bs-btn-active-color: var(--midnight-navy);
+            --bs-btn-active-color: var(--egyptian-blue);
             --bs-btn-active-bg: var(--soft-ivory);
             --bs-btn-active-border-color: var(--soft-ivory);
             font-weight: 600;
@@ -264,10 +273,10 @@
         .btn-outline-dark {
             --bs-btn-color: var(--soft-ivory);
             --bs-btn-border-color: var(--border-strong);
-            --bs-btn-hover-color: var(--midnight-navy);
+            --bs-btn-hover-color: var(--egyptian-blue);
             --bs-btn-hover-bg: var(--soft-ivory);
             --bs-btn-hover-border-color: var(--soft-ivory);
-            --bs-btn-active-color: var(--midnight-navy);
+            --bs-btn-active-color: var(--egyptian-blue);
             --bs-btn-active-bg: var(--soft-ivory);
             --bs-btn-active-border-color: var(--soft-ivory);
             border-radius: var(--radius-pill);
@@ -284,20 +293,21 @@
         .btn-resume:hover {
             background: var(--soft-ivory);
             border-color: var(--soft-ivory);
-            color: var(--midnight-navy);
+            color: var(--egyptian-blue);
             transform: translateY(-2px);
         }
 
+        /* Scarlet CTA — reserve for one key action per page */
         .btn-accent {
-            --bs-btn-color: var(--midnight-navy);
+            --bs-btn-color: var(--on-accent);
             --bs-btn-bg: var(--scarlet-red);
             --bs-btn-border-color: var(--scarlet-red);
-            --bs-btn-hover-color: var(--midnight-navy);
-            --bs-btn-hover-bg: #EE6464;
-            --bs-btn-hover-border-color: #EE6464;
-            --bs-btn-active-color: var(--midnight-navy);
-            --bs-btn-active-bg: #D13F3F;
-            --bs-btn-active-border-color: #D13F3F;
+            --bs-btn-hover-color: var(--on-accent);
+            --bs-btn-hover-bg: var(--scarlet-hover);
+            --bs-btn-hover-border-color: var(--scarlet-hover);
+            --bs-btn-active-color: var(--on-accent);
+            --bs-btn-active-bg: var(--scarlet-active);
+            --bs-btn-active-border-color: var(--scarlet-active);
             --bs-btn-border-width: 0;
             font-weight: 700;
             transition: transform 0.2s ease, background-color 0.2s ease;
@@ -370,14 +380,14 @@
         footer .social-link:hover {
             color: var(--soft-ivory);
             border-color: var(--stone-blue);
-            background: rgba(139, 169, 197, 0.08);
+            background: rgba(99, 156, 197, 0.10);
         }
 
         /* ---------- RESPONSIVE NAV ---------- */
         @media (max-width: 991.98px) {
             .navbar {
-                background-color: rgba(11, 21, 33, 0.97) !important;
-                box-shadow: 0 1px 0 var(--border), 0 4px 14px rgba(4, 10, 20, 0.35);
+                background-color: rgba(2, 24, 41, 0.97) !important;
+                box-shadow: 0 1px 0 var(--border), 0 4px 14px rgba(0, 8, 18, 0.4);
             }
 
             .navbar-brand {

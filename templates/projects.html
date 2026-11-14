@@ -23,7 +23,7 @@
     .project-card:hover {
         transform: translateY(-6px);
         box-shadow: var(--shadow-lift);
-        border-color: rgba(139, 169, 197, 0.35);
+        border-color: var(--border-strong);
     }
 
     .project-img-wrap {
@@ -82,7 +82,7 @@
         font-weight: 500;
         padding: 0.3rem 0.65rem;
         border-radius: var(--radius-pill);
-        background: rgba(36, 90, 155, 0.2);
+        background: rgba(99, 156, 197, 0.12);
         border: 1px solid var(--border);
         color: var(--soft-ivory);
         margin-right: 0.3rem;
@@ -102,7 +102,7 @@
         font-size: 0.8rem;
         color: var(--stone-blue);
         font-style: italic;
-        opacity: 0.85;
+        opacity: 0.9;
     }
 
     @media (max-width: 767.98px) {
@@ -141,6 +141,7 @@
                         {% if project.image %}
                         <img src="{{ project.image }}"
                              class="project-img"
+                             loading="lazy"
                              alt="{{ project.title }}">
                         {% else %}
                         <div class="project-img-placeholder">
