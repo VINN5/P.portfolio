@@ -87,8 +87,8 @@
         content: "";
         position: absolute;
         inset: 0;
-        -webkit-mask: url("{{ url_for('static', filename='images/vinn-cutout.png') }}") center / 100% 100% no-repeat;
-        mask: url("{{ url_for('static', filename='images/vinn-cutout.png') }}") center / 100% 100% no-repeat;
+        -webkit-mask: url("/images/vinn-cutout.webp") center / 100% 100% no-repeat;
+        mask: url("/images/vinn-cutout.webp") center / 100% 100% no-repeat;
     }
 
     /* cool rim light from the upper left */
@@ -566,7 +566,7 @@
     <div class="hero-figure">
         <div class="hero-figure__frame">
             <img class="hero-figure__img"
-                 src="{{ url_for('static', filename='images/vinn-cutout.png') }}"
+                 src="/images/vinn-cutout.webp"
                  alt="Portrait of Vincent Wambugu Wambui"
                  fetchpriority="high"
                  decoding="async">
@@ -596,7 +596,7 @@
             <div class="hero-actions">
                 <a href="/projects" class="btn btn-accent">View Projects</a>
                 <a href="/contact" class="btn btn-outline-primary">Contact Me</a>
-                <a href="{{ url_for('static', filename='files/resume.pdf') }}"
+                <a href="/files/resume.pdf"
                    class="btn btn-resume" download>
                     <i class="fas fa-download me-2"></i>Resume
                 </a>
